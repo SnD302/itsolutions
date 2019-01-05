@@ -1,151 +1,20 @@
-<h1>CELX-DEV</h1>
+# Introduction 
+TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
 
-<h1>Un-Authenticated Calls</h1>
+# Getting Started
+TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
+1.	Installation process
+2.	Software dependencies
+3.	Latest releases
+4.	API references
 
-<h2>Register Call</h2>
-<h4>Method: POST</h4>
-<h4>URL:  /register</h4>
-<h3>Params in Body:</h3>
-<p>
-name:String,</br>
-email: String,</br>
-password: String,</br>
-mobile: Number,</br>
-username: String,</br>
-country : String</br>
-</p>
-<h3>Response:</h3>
-<h4>Status Code: 409</h4>
-<p>
-message:"email already exists."
-</p>
+# Build and Test
+TODO: Describe and show how to build your code and run the tests. 
 
-<h4>Status Code: 202</h4>
-<p>
-message:"User account created successfully."
-</p>
-<h4>Status Code: 403</h4>
-<p>
-message:"Email required."
-</p>
+# Contribute
+TODO: Explain how other users and developers can contribute to make your code better. 
 
-
-
-<h2>LOGIN Call</h2>
-<h4>Method: POST</h4>
-<h4>URL:  /authenticate</h4>
-<h3>Params in Body:</h3>
-<p>
-
-email: String,</br>
-password: String</br>
-</p>
-<h3>Response:</h3>
-<h4>Status Code: 200</h4>
-<p>
-{ success: true, </br>token: 'JWT ' + token, </br>user: found}
-</p>
-<h4>Status Code: 401</h4>
-<p>
-{ success: false, </br>message: 'password did not match.' }</br>
-OR</br>
-{ success: false, message: 'user not found' }
-</br>
-</p>
-<h4>Status Code: 403</h4>
-<p>
-{ message: "Perameters Missing" }
-</p>
-
-
-<h2>Get Mobile Specs</h2>
-<h4>Method: POST</h4>
-<h4>URL:  /getMobileSpecs</h4>
-<h3>Params in Body:</h3>
-<p>
-
-mobileName: String</br>
-</p>
-<h3>Response:</h3>
-<h4>Status Code: 200</h4>
-<p>
-{ result : response }
-</p>
-<h4>Status Code: 403</h4>
-<p>
-{ message : "Mobile name is required" }  
-</p>
-
-
-
-
-
-
-
-
-<h1>Authenticated Calls</h1>
-
-
-<h2>Place an Advertisement</h2>
-<h4>Method: POST</h4>
-<h4>URL:  /api/placeAdd</h4>
-<h3>Params in Body:</h3>
-<p>
-advertID: String</br>
-</p>
-<p>
-JSON of all Params</br>
-</p>
-<h3>Response:</h3>
-<h4>Status Code: 202</h4>
-<p>
-{ result : result }
-</p>
-<h4>Status Code: 404</h4>
-<p>
-{ message : "Advertisement not found." }  
-</p>
-
-
-<h2>Search An Advertisement / Search Mobile Advertised</h2>
-<h4>Method: POST</h4>
-<h4>URL:  /api/searchMobile</h4>
-<h3>Params in Body:</h3>
-<p>
-advertID: String</br>
-</p>
-<p>
-JSON of all Params</br>
-</p>
-<h3>Response:</h3>
-<h4>Status Code: 202</h4>
-<p>
-{ result : result }
-</p>
-<h4>Status Code: 404</h4>
-<p>
-{ message : "No match found." }  
-</p>
-
-
-
-
-<h2>Upload Mobile Images</h2>
-<h4>Method: POST</h4>
-<h4>URL:  /api/uploadImage</h4>
-<h3>Params in Body:</h3>
-<p>
-advertID: String</br>
-</p>
-<p>
-userFile: File (Image File)</br>
-</p>
-<h3>Response:</h3>
-<h4>Status Code: 200</h4>
-<p>
-{ result : final }
-</p>
-<h4>Status Code: 404</h4>
-<p>
-{ message : "Advertisement not found." }  
-</p>
+If you want to learn more about creating good readme files then refer the following [guidelines](https://www.visualstudio.com/en-us/docs/git/create-a-readme). You can also seek inspiration from the below readme files:
+- [ASP.NET Core](https://github.com/aspnet/Home)
+- [Visual Studio Code](https://github.com/Microsoft/vscode)
+- [Chakra Core](https://github.com/Microsoft/ChakraCore)

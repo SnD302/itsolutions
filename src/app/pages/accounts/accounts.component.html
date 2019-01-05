@@ -1,0 +1,158 @@
+
+<mat-sidenav-container>
+
+<!-- <mat-sidenav [opened]="false" mode="over" #sidenav class="sidenav mat-elevation-z6">
+    <button mat-icon-button color="warn" class="close" (click)="sidenav.close()">
+       <mat-icon color="warn">close</mat-icon>
+    </button>
+    <div class="divider"></div>
+    <app-sidenav-menu [menuItems]="sidenavMenuItems" [menuParentId]="0"></app-sidenav-menu>
+    <div class="divider"></div>
+    <div class="text-center py-2">
+        <svg class="social-icon" viewBox="0 0 24 24">
+            <path d="M5,3H19A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3M18,5H15.5A3.5,3.5 0 0,0 12,8.5V11H10V14H12V21H15V14H18V11H15V9A1,1 0 0,1 16,8H18V5Z" />
+        </svg>
+        <svg class="social-icon" viewBox="0 0 24 24">
+            <path d="M5,3H19A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3M17.71,9.33C18.19,8.93 18.75,8.45 19,7.92C18.59,8.13 18.1,8.26 17.56,8.33C18.06,7.97 18.47,7.5 18.68,6.86C18.16,7.14 17.63,7.38 16.97,7.5C15.42,5.63 11.71,7.15 12.37,9.95C9.76,9.79 8.17,8.61 6.85,7.16C6.1,8.38 6.75,10.23 7.64,10.74C7.18,10.71 6.83,10.57 6.5,10.41C6.54,11.95 7.39,12.69 8.58,13.09C8.22,13.16 7.82,13.18 7.44,13.12C7.81,14.19 8.58,14.86 9.9,15C9,15.76 7.34,16.29 6,16.08C7.15,16.81 8.46,17.39 10.28,17.31C14.69,17.11 17.64,13.95 17.71,9.33Z" />
+        </svg>
+        <svg class="social-icon" viewBox="0 0 24 24">
+            <path d="M5,3H19A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3M19.5,12H18V10.5H17V12H15.5V13H17V14.5H18V13H19.5V12M9.65,11.36V12.9H12.22C12.09,13.54 11.45,14.83 9.65,14.83C8.11,14.83 6.89,13.54 6.89,12C6.89,10.46 8.11,9.17 9.65,9.17C10.55,9.17 11.13,9.56 11.45,9.88L12.67,8.72C11.9,7.95 10.87,7.5 9.65,7.5C7.14,7.5 5.15,9.5 5.15,12C5.15,14.5 7.14,16.5 9.65,16.5C12.22,16.5 13.96,14.7 13.96,12.13C13.96,11.81 13.96,11.61 13.89,11.36H9.65Z" />
+        </svg>
+    </div>
+</mat-sidenav> -->
+
+
+
+    <mat-toolbar-row fxLayoutAlign="space-between center" class="top-toolbar theme-container" style="background-color:#156dbf">
+        <span fxHide="false" fxHide.gt-sm>
+            <button mat-button (click)="sidenav.toggle()" class="sidenav-toggle">
+                <mat-icon>menu</mat-icon>
+            </button>
+        </span>
+        <span fxShow="false" fxShow.gt-xs fxLayoutAlign="center center">   </span>
+        <span fxShow="false" fxShow.gt-sm></span>
+        <app-top-menu></app-top-menu>
+    </mat-toolbar-row>
+
+
+
+<router-outlet></router-outlet>
+
+
+<span class="new_price" [hidden]="hid">
+  <input type="number" [(ngModel)]="price">
+  <button (click)="submitPrice(price)">Submit</button>
+  <button>Cancel</button>
+</span>
+<div class="form_div">
+
+  <div class="inner_div"  [hidden]="!hid">
+
+
+<mat-tab-group class="tab_group" >
+
+  <mat-tab label="My Advertisements">
+
+    <div class="above_tab">Ads You Have Posted Till Now </div>
+		<div *ngFor="let myad of myadd" class="adds_view" >
+		<a [routerLink]="['/products', myad._id, myad.title]" class="title text-truncate">
+      <span class="pics"><img [src]="myad.pictures[0]" class="pictures"></span>
+        <span class="titl">{{myad.title}}</span>
+		</a>
+      <span class="price">Rs. {{myad.price}}</span>
+
+    <span class="deactivate">deactivate ad X </span>
+    <span class="edit">edit  </span>
+    <span class="preview" [routerLink]="['/products', myad._id, myad.title]">  preview >>> </span>
+    <mat-icon class="msgs">mail_outline</mat-icon>
+    <span class="created">Ad Posted: {{myad.createdAt}}</span>
+      <mat-slide-toggle color="primary" class="slide" Default="true" [(ngModel)]="myad._id" name="sli" ng-true-value = 'false'
+      ng-false-value='true' (ngModelChange)="slide_ad(myad._id)"></mat-slide-toggle>
+    <img src="\assets\images\boost.png" class="boost" (click)="boostad(myad._id)"/>
+	</div>
+</mat-tab>
+	<mat-tab label="My Offers">
+    <mat-horizontal-stepper [linear]="isLinear" #horizontalstepper>
+    <mat-step>
+    <ng-template matStepLabel>Sent</ng-template>
+    <div *ngFor="let myoffer of myoffers" class="adds_view">
+      <img [src]="myoffer.advert_id.pictures[0]" class="pictures">
+        <span class="titl">{{myoffer.advert_id.title}}</span>
+    <span class="price" >Rs. {{myoffer.offered_price}}</span>
+
+
+
+    <span class="created">Ad Posted: {{myoffer.advert_id.createdAt}}</span>
+    <span *ngIf="myoffer.status ==='accepted'">
+      <button mat-raised-button ngDefaultControl class="acc_rjj" [(ngModel)]="myoffer.sail_id" [value]="myoffer.sail_id"  (click)="afteraccepted(myoffer.sail_id)">{{myoffer.status}}</button>
+    </span>
+    <span *ngIf="myoffer.status ==='pending'">
+      <button mat-raised-button ngDefaultControl class="acc_rjj" [(ngModel)]="myoffer.sail_id" [value]="myoffer.sail_id"  (click)="updateoffer(myoffer._id)">{{Edit}}</button>
+    </span>
+  </div>
+  <span class="adds_view">{{this.nooffers}}</span>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Received</ng-template>
+  <div *ngFor="let myaddoff of myaddoffers" class="adds_view" (click)="clickoff()">
+    <a [routerLink]="['/offers']" target="_blank" class="title text-truncate" >
+    <img [src]="myaddoff.pictures[0]" class="pictures">
+      <span class="titl">{{myaddoff.title}}</span>
+    <span class="price">Rs. {{myaddoff.offers[0].offered_price}}</span>
+    <!-- <span class="preview1" [routerLink]="['/products', myaddoff._id, myaddoff.title]">  preview >>> </span> -->
+    <span class="created">Ad Posted: {{myaddoff.createdAt}}</span>
+  </a>
+    <!-- <mat-icon class="tick_cross1" (click)="accept_reject(tick,myaddoff.offers[0]._id)">check</mat-icon>
+    <mat-icon class="tick_cross" (click)="accept_reject1(cross)">clear</mat-icon> -->
+</div>
+<span class="adds_view">{{this.nooffers}}</span>
+
+<div *ngFor="let myaccept of myaddaccepted" class="adds_view" (click)="clickoff()">
+  <img [src]="myaccept.pictures[0]" class="pictures">
+    <span class="titl">{{myaccept.title}}</span>
+  <span class="price">Rs. {{myaccept.offers[0].offered_price}}</span>
+  <button mat-raised-button ngDefaultControl class="acc_rjj" [(ngModel)]="myaccept.sail_id" [value]="myaccept.offers[0].sail_id" (click)="afteracceptedsell(myaccept.offers[0].sail_id)">{{myaccept.offers[0].status}}</button>
+  <span class="created">Ad Posted: {{myaccept.createdAt}}</span>
+</div>
+  </mat-step>
+  </mat-horizontal-stepper>
+
+</mat-tab>
+	<mat-tab label="My Purchases">
+		<div *ngFor="let myoffer of myoffers" class="adds_view">
+		<a [routerLink]="['/products', myoffer._id, myoffer.title]" class="title text-truncate">
+      <img [src]="myoffer.advert_id.pictures[0]" class="pictures">
+        <span class="titl">{{myoffer.advert_id.title}}</span>
+		</a>
+    <span class="price">Rs. {{myoffer.offered_price}}</span>
+    <span class="created">Ad Posted: {{myoffer.advert_id.createdAt}}</span>
+    <button mat-raised-button ngDefaultControl class="acc_rjj" >{{myoffer.status}}</button>
+
+
+	</div>
+</mat-tab>
+  <mat-tab label="Favourite Adds"> Content 3
+		<div *ngFor="let myfavourit of myfavourite" class="adds_view">
+		<a [routerLink]="['/products', myfavourit._id, myfavourit.title]" class="title text-truncate">
+      <img [src]="myfavourit.pictures[0]" class="pictures">
+      	<span class="titl">{{myfavourit.title}}</span>
+		</a>
+  <span class="price">Rs. {{myfavourit.price}}</span>
+  <span class="created">Ad Posted: {{myfavourit.createdAt}}</span>
+	</div>
+</mat-tab>
+</mat-tab-group>
+</div>
+</div>
+
+
+<app-options></app-options>
+
+<!-- <app-footer></app-footer> -->
+
+<div *ngIf="showBackToTop" fxLayout="row" fxLayoutAlign="center center" class="back-to-top transition" (click)="scrollToTop()">
+    <mat-icon>arrow_upward</mat-icon>
+</div>
+
+
+</mat-sidenav-container>

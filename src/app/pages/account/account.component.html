@@ -1,0 +1,53 @@
+<mat-sidenav-container>
+    <mat-sidenav #sidenav [opened]="sidenavOpen" [mode]="sidenavOpen ? 'side' : 'over'" class="account-sidenav" perfectScrollbar>
+        <mat-nav-list class="mat-elevation-z1 h-100">
+            <mat-list-item  (click)="showadds()">
+                <mat-icon matListIcon class="mat-icon-sm">Adds</mat-icon>
+                <a matLine  routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">Adds</a>
+            </mat-list-item>
+
+            <mat-list-item >
+                <mat-icon matListIcon class="mat-icon-sm">Purchases</mat-icon>
+                <a matLine  routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">Purchases</a>
+            </mat-list-item>
+
+            <mat-list-item >
+                <mat-icon matListIcon class="mat-icon-sm">Offers</mat-icon>
+                <a matLine  routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">Offers</a>
+            </mat-list-item>
+
+            <mat-list-item >
+                <mat-icon matListIcon class="mat-icon-sm">Signout</mat-icon>
+                <a matLine  routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">Signout</a>
+            </mat-list-item>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content class="account-content" ngClass.gt-sm="p-left">
+
+      <div *ngFor="let myad of myadd" class="adds_view" >
+      <a [routerLink]="['/products', myad._id, myad.title]" class="title text-truncate">
+        <span class="pics"><img [src]="myad.pictures[0]" class="pictures"></span>
+          <span class="titl">{{myad.title}}</span>
+      </a>
+        <span class="price">Rs. {{myad.price}}</span>
+
+      <span class="deactivate">deactivate ad X </span>
+      <span class="edit">edit  </span>
+      <span class="preview" [routerLink]="['/products', myad._id, myad.title]">  preview >>> </span>
+      <mat-icon class="msgs">mail_outline</mat-icon>
+      <span class="created">Ad Posted: {{myad.createdAt}}</span>
+        <!-- <mat-slide-toggle color="primary" class="slide" Default="true" [(ngModel)]="myad._id" name="sli" ng-true-value = 'false'
+        ng-false-value='true' (ngModelChange)="slide_ad(myad._id)"></mat-slide-toggle> -->
+      <img src="\assets\images\boost.png" class="boost" (click)="boostad(myad._id)"/>
+      </div>
+        <!-- <div fxLayout="row" fxLayoutAlign="space-between center" class="header-row mat-elevation-z1 text-muted">
+            <button *ngIf="!sidenavOpen" mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <h3>My Account</h3>
+        </div>
+        <div class="account-wrapper mat-elevation-z1">
+            <router-outlet></router-outlet>
+        </div> -->
+    </mat-sidenav-content>
+</mat-sidenav-container>

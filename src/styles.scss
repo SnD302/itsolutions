@@ -1,0 +1,50 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~swiper/dist/css/swiper.min.css';
+@import "app/theme/styles/base";
+@import "app/theme/styles/theme";
+@font-face {
+  font-family: prox;
+  src: url(assets/Fonts/ProximaNovaBlack.otf) format("opentype");
+}
+@font-face {
+  font-family: proxr;
+  src: url(assets/Fonts/ProximaNovaRegular.otf) format("opentype");
+}
+@font-face {
+  font-family: proxs;
+  src: url(assets/Fonts/ProximaNovaSemibold.otf) format("opentype");
+}
+
+.mat-checkbox-inner-container {
+  height: 13px!important;
+  width: 13px!important;
+  color: #5a555e;
+}
+// .mat-checkbox-inner-container-no-side-margin{
+//   position: absolute;
+//   left: 60px;
+// }
+
+// .mat-expansion-panel-body {
+//     padding: 0;
+// }
+// .parametersPanel .mat-expansion-panel-body {
+//     padding: 0;
+// }
+// .mat-expansion-panel-content > .mat-expansion-panel-body {
+//   padding: 0 !important;
+// }
+.mat-card.product-image[_ngcontent-c12] img[_ngcontent-c12]{
+  // width: 50%;
+  // height: 100%;
+}
+// .mat-card:not([class*=mat-elevation-z]){
+//   box-shadow: 0% 0% 0%;
+// }
+// .mat-nav-list .mat-list-item .mat-list-icon{
+//   height: 16px;
+//   width: 16px;
+// }

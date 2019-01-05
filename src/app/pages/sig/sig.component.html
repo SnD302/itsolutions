@@ -1,0 +1,186 @@
+
+<!-- <div class="form_div">
+  <div class="inner_div"> -->
+<div style="padding:10%; font-family:proxr">
+  <img src="/assets/images/icons/logowhite.png" (click)="adrouter()" fxFlex.gt-sm="50" fxShow.sm="false" fxHide fxShow.gt-sm fxHide.sm height=200 class="logo"/>
+  <span style="font-family:proxs; color:#ffffff;font-size:150%; margin-left:-20%;" fxFlex.gt-sm="50" fxShow.sm="false" fxHide fxShow.gt-sm fxHide.sm>
+    World's Top Mobile Market
+  </span>
+<mat-card class="matCard">
+      <form [formGroup]="loginForm" (ngSubmit)="onLoginFormSubmit(loginForm.value)" [hidden]="!si">
+        <span class="text-muted text-center" style="font-size:150%;text-align:center;margin-left:25%;margin-right:20%;font-weight:400;"><u style="color:#156dbf;">LOGIN TO CELX</u></span>
+          <mat-form-field class="w-100 mt-1" style=" font-size:100%;">
+              <img src="/assets/images/icons/email.png" height=10/>
+              <input matInput placeholder="&nbsp; &nbsp; &nbsp; Email Address" style="font-size:100%;" formControlName="email" required>
+              <mat-error *ngIf="loginForm.controls.email.errors?.required" style="font-size:100%; ">Email is required</mat-error>
+              <mat-error *ngIf="loginForm.controls.email.hasError('invalidEmail')" >Invalid email address</mat-error>
+          </mat-form-field>
+          <mat-form-field class="w-100" style="font-size:100%;">
+            <img src="/assets/images/icons/password.png" height=10/>
+              <input matInput placeholder="&nbsp; &nbsp; &nbsp; Password" type="password" style="font-size:100%;" formControlName="password" required>
+              <mat-error *ngIf="loginForm.controls.password.errors?.required" style="font-size:100%;">Password is required</mat-error>
+              <mat-error *ngIf="loginForm.controls.password.hasError('minlength')">Password isn't long enough, minimum of 6 characters</mat-error>
+          </mat-form-field>
+          {{this.mismatch}}
+          <div class="text-center mt-2">
+            </div>
+              <div class="">
+          <button mat-stroked-button  style="border-color:#156dbf;border-radius:15px 15px 15px 15px; width:60%;margin-left:20%;margin-top:-8%;" (click)="onLoginFormSubmit(loginForm.value)">
+                  <b style="color:#156dbf">Sign in</b>
+              </button>
+          </div>
+          <div class="text-center mt-2" >
+            <span style="margin-left:30%;font-family:proxs;color:#DDDDDD" (click) = "forgotPassword()">Forgot Password?</span>
+      </div>
+      <div class="text-center mt-2">
+        <span style="margin-left:20%;"><i>Don't have an account?</i> <u><b style="color:#156dbf" (click)="signup()">Signup</b></u></span>
+  </div>
+
+  </form>
+
+<div [hidden]="!su">
+  <form [formGroup]="registerForm" (ngSubmit)="onRegisterFormSubmit(registerForm.value)" >
+    <span class="text-muted text-center" style="font-size:150%;text-align:center;margin-left:35%;margin-right:20%;font-weight:400;"><u style="color:#156dbf;">SIGN UP</u></span>
+      <mat-form-field class="w-100 mt-2" style="height:5%; font-size:100%;">
+        <input matInput placeholder="Full Name" style="font-size:120%;" formControlName="name" required>
+        <mat-error *ngIf="registerForm.controls.name.errors?.required">Full Name is required</mat-error>
+        <mat-error *ngIf="registerForm.controls.name.hasError('minlength')">Full Name isn't long enough, minimum of 3 characters</mat-error>
+      </mat-form-field>
+      <mat-form-field class="w-100 mt-1" style="height:5%; font-size:100%;">
+          <input matInput placeholder="Email" style="font-size:120%;" formControlName="email1" required>
+          <mat-error *ngIf="registerForm.controls.email1.errors?.required">Email is required</mat-error>
+          <mat-error *ngIf="registerForm.controls.email1.hasError('invalidEmail')">Invalid email address</mat-error>
+      </mat-form-field>
+      <mat-form-field class="w-100 mt-1" style="height:5%; font-size:100%;">
+          <input matInput placeholder="Password" type="password" style="font-size:120%;" formControlName="password" type="password" minlength="6" required>
+          <mat-error *ngIf="registerForm.controls.password.errors?.required">Password is required</mat-error>
+          <mat-error *ngIf="registerForm.controls.password.hasError('minlength')">Password isn't long enough, minimum of 6 characters</mat-error>
+      </mat-form-field>
+      <mat-form-field class="w-100 mt-1" style="height:5%; font-size:100%;">
+        <input matInput placeholder="Confirm Password" type="password" style="font-size:120%;" formControlName="confirmPassword" type="password" required>
+        <mat-error *ngIf="registerForm.controls.confirmPassword.errors?.required">Confirm Password is required</mat-error>
+        <mat-error *ngIf="registerForm.controls.confirmPassword.hasError('mismatchedPasswords')">Passwords do not match</mat-error>
+      </mat-form-field>
+      <mat-form-field class="w-100 mt-2" style="height:5%; font-size:100%;">
+        <input matInput placeholder="Mobile Number" style="font-size:120%;" formControlName="mobile_number" required>
+        <mat-error *ngIf="registerForm.controls.mobile_number.errors?.required">Mobile Number is required</mat-error>
+        <mat-error *ngIf="registerForm.controls.mobile_number.hasError('minlength')">Phone Number is Not Valid</mat-error>
+      </mat-form-field>
+<span style="color:#cc0000; font-size: 70%;"> {{this.invalidformat}} </span>
+
+
+
+      <div class="text-center mt-2">
+        <div id="recaptcha-container"></div>
+        <br>
+  <button mat-stroked-button  style="border-color:#156dbf;border-radius:15px 15px 15px 15px; width:60%;margin-left:20%;" (click)="onRegisterFormSubmit(registerForm.value)">
+          <b style="color:#156dbf">Sign Up</b>
+      </button>
+  <div class="text-center mt-2">
+    <span style="margin-left:20%;"><i>Already have an account?</i> <u><b style="color:#156dbf" (click)="signin()">Signin</b></u></span>
+</div>
+  </div>
+  </form>
+</div>
+
+
+  <!-- <div [hidden]="user"> -->
+
+<!-- <label for="phone">Phone Number</label><br>
+<input type="text" [(ngModel)]="yourphone"  class="input" placeholder="Phone Number" > -->
+
+<!-- <div id="recaptcha-container"></div>
+
+<button (click)="sendLoginCode(phonenumber)">SMS Text Login Code</button>
+
+
+</div> -->
+<!-- *ngIf="windowRef.confirmationResult" -->
+<div [hidden]="!verifyscreen">
+<!-- <h3 for="code">VERIFY NUMBER</h3><br> -->
+<!-- <input type="text" name="code" [(ngModel)]="verificationCode"  class="input" placeholder="Verification Code" > -->
+<form [formGroup]="VerificationForm">
+<span class="text-muted text-center" for="code" style="font-size:150%;text-align:center;margin-left:20%;margin-right:20%;font-weight:400;"><u style="color:#156dbf;">VERIFY NUMBER</u></span>
+  <mat-form-field class="w-100 mt-2" style="height:5%; font-size:100%;">
+    <input matInput placeholder="Verification Code" name="code" class="input" style="font-size:120%;" formControlName="vcode" required>
+    <mat-error *ngIf="VerificationForm.controls.vcode.hasError('minlength')">Code isn't long enough, minimum of 6 characters</mat-error>
+
+  </mat-form-field>
+  <span style="color:#cc0000; font-size: 70%;"> {{this.invalidformat}} </span>
+</form>
+
+<!-- <input type="text" name="code" [(ngModel)]="verificationCode"> -->
+
+<!-- <button (click)="verifyLoginCode()">Verify</button> -->
+<button mat-stroked-button  style="border-color:#156dbf;border-radius:15px 15px 15px 15px; width:60%;margin-left:20%;" (click)="verifyLoginCode(VerificationForm.value)">
+        <b style="color:#156dbf">Verify</b>
+    </button>
+</div>
+
+
+<div [hidden]="!numexist">
+<form [formGroup]="NewNumForm">
+  <span class="text-muted text-center" for="code" style="font-size:150%;text-align:center;margin-left:20%;margin-right:20%;font-weight:400;"><u style="color:#156dbf;">VERIFY NUMBER</u></span>
+  <div id="recaptcha-container"></div>
+  <mat-form-field class="w-100 mt-2" style="height:5%; font-size:100%;">
+    <input matInput placeholder="Mobile Number" style="font-size:120%;" formControlName="mobile_number11" required>
+    <mat-error *ngIf="NewNumForm.controls.mobile_number11.errors?.required">Mobile Number is required</mat-error>
+    <mat-error *ngIf="NewNumForm.controls.mobile_number11.hasError('minlength')">Phone Number is Not Valid</mat-error>
+  </mat-form-field>
+  {{this.invalidformat}}
+  <button mat-stroked-button  style="border-color:#156dbf;border-radius:15px 15px 15px 15px; width:60%;margin-left:20%;" (click)="sendLoginCode(NewNumForm.value)">
+          <b style="color:#156dbf">Send Code</b>
+      </button>
+
+  <mat-form-field class="w-100 mt-2" style="height:5%; font-size:100%;">
+    <input matInput placeholder="Verification Code" name="code" class="input" style="font-size:120%;" formControlName="vcode11" required>
+    <mat-error *ngIf="NewNumForm.controls.vcode11.hasError('minlength')">Code isn't long enough, minimum of 6 characters</mat-error>
+
+  </mat-form-field>
+</form>
+
+
+<button mat-stroked-button  style="border-color:#156dbf;border-radius:15px 15px 15px 15px; width:60%;margin-left:20%;" (click)="verifyLoginCodeNewNum(NewNumForm.value)">
+        <b style="color:#156dbf">Verify</b>
+    </button>
+</div>
+
+<!-- <div *ngIf="user">
+You have successfully logged in with your phone number!
+
+UserId: {{ user?.uid }}
+
+</div> -->
+
+
+  <form [formGroup]="forgotForm" (ngSubmit)="onforgetFormSubmit(forgotForm.value)" [hidden]="!fp">
+    <span class="text-muted text-center" style="font-size:150%;text-align:center;margin-left:20%;margin-right:10%;font-weight:400;"><u style="color:#156dbf;">FORGOT PASSWORD</u></span>
+      <mat-form-field class="w-100 mt-2" style="height:5%; font-size:100%;">
+          <img src="/assets/images/icons/email.png" height=10/>
+          <input matInput placeholder=" &nbsp; &nbsp; &nbsp; email address" style="font-size:120%; padding-left:2%;" formControlName="email" required>
+          <mat-error *ngIf="forgotForm.controls.email.errors?.required" style="font-size:130%; ">Email is required</mat-error>
+          <mat-error *ngIf="forgotForm.controls.email.hasError('invalidEmail')" >Invalid email address</mat-error>
+      </mat-form-field>
+
+      <div class="text-center mt-2">
+        </div>
+          <div class="text-center mt-2">
+      <button mat-stroked-button  style="border-color:#156dbf;border-radius:15px 15px 15px 15px; width:60%;margin-left:20%;" (click)="onforgotFormSubmit(forgotForm.value)">
+              <b style="color:#156dbf">Submit</b>
+          </button>
+      </div>
+  <div class="text-center mt-2">
+    <span style="margin-left:20%;"><i>Have an other account?</i> <u><b style="color:#156dbf" (click)="signin()">Signin</b></u></span>
+</div>
+
+</form>
+
+</mat-card>
+
+</div>
+<div class="prox_r" style="text-align:center; color:#ffffff; font-size:100%; margin-top:90px">
+  Copyright Protected (c) 2018
+</div>
+
+<!-- </div>
+</div> -->

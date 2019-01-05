@@ -1,0 +1,344 @@
+
+<div [hidden]="!hidemain">
+<mat-toolbar style="background-color:#156dbf">
+  <mat-toolbar-row fxLayoutAlign="space-between center" class="logo-toolbar theme-container" style="background-color:#FFFFFF">
+      <a class="logo" routerLink="/"  (click) ="closeSubMenus()">
+      <img src="assets/images/icons/logo.png" height=100 style="margin-left:100%"/>
+    </a>
+      <div fxFlex fxFlexOffset.gt-sm="10" fxShow="false" fxShow.gt-sm>
+          <form method="get"  class="search-form" fxLayout="row" style="border: 1px solid; border-color:#cccccc; border-radius:15px 15px 15px 15px; margin-left:80px; width:60%;">
+            <button mat-mini-fab type="button" class="search-btn mat-elevation-z0 text-muted">
+                <mat-icon>search</mat-icon>
+            </button>
+              <input type="text" placeholder="Search with Keywords"  fxFlex [(ngModel)]="brand_1" [ngModelOptions]="{standalone: true}"(ngModelChange)="onsearch($event)" style="font-size:80%; font-family:proxr"/>
+          </form>
+      </div>
+      <div *ngIf="brand_1 != undefined && brand_1 != '' " class="search_res"> Searching in {{brand_1}} </div>
+
+
+
+      <div fxFlexOffset="10" fxLayout="row" fxLayoutAlign="center center">
+          <div fxLayoutAlign="center center" fxHide="false" fxHide.gt-sm>
+              <button mat-icon-button [matMenuTriggerFor]="searchMenu" #searchMenuTrigger="matMenuTrigger" class="search-toggle-btn">
+                  <mat-icon class="mat-icon-lg">search</mat-icon>
+              </button>
+              <mat-menu #searchMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="search-dropdown mat-elevation-z8">
+                  <form method="get" fxFlex class="search-form">
+                      <button mat-raised-button [matMenuTriggerFor]="categories2Menu" #categories2MenuTrigger="matMenuTrigger" type="button" class="mat-elevation-z0 categories text-muted" (click)="stopClickPropagate($event)">{{category?.name}}<mat-icon>arrow_drop_down</mat-icon></button>
+                      <mat-menu #categories2Menu="matMenu" [overlapTrigger]="false" xPosition="before" class="categories-dropdown">
+                          <span (mouseleave)="categories2MenuTrigger.closeMenu()">
+                              <app-category-list [categories]="categories" [categoryParentId]="0" (change)="changeCategory($event)"></app-category-list>
+                          </span>
+                      </mat-menu>
+                      <input type="text" placeholder="Type to search..." fxFlex (click)="stopClickPropagate($event)">
+                      <button mat-mini-fab (click)="search()" type="button" class="search-btn mat-elevation-z0 text-muted">
+                          <mat-icon>search</mat-icon>
+                      </button>
+                  </form>
+              </mat-menu>
+          </div>
+
+      </div>
+
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-sidenav-container style="background-color:#FFFFFF;">
+
+    <mat-sidenav #sidenav [opened]="sidenavOpen" [mode]="sidenavOpen ? 'side' : 'over'" class="filter-sidenav" style="padding-left:5%; margin-right: 15%;width:20%;" perfectScrollbar>
+
+        <div style="margin-top:5%;">
+        </div>
+        <br>
+        <br>
+
+        <mat-accordion displayMode="flat" multi="false">
+            <mat-expansion-panel class="mat-elevation-z0" expanded>
+              <mat-expansion-panel-header>
+                    <mat-panel-title>
+
+                  <div class="heads">{{dtype}}</div>
+
+                </mat-panel-title>
+
+                </mat-expansion-panel-header>
+
+                  <!-- <br> -->
+                  <!-- <div fxLayout="column" *ngFor="let category of categories">
+                      <mat-checkbox color="warn"[(ngModel)]="category.checked" name="checkcat" [value]="category.name" (ngModelChange)="checkcategory(category.name)">
+                        <label>{{category.name}}</label>
+                      </mat-checkbox>
+
+                  </div> -->
+
+                  <div fxLayout="row wrap" [(ngModel)]="select_image" [ngModelOptions]="{standalone: true}" >
+                      <!-- <mat-checkbox color="warn"[(ngModel)]="category.checked" name="checkcat" [value]="category.name" (ngModelChange)="checkcategory(category.name)">
+                        <label>{{category.name}}</label>
+                      </mat-checkbox> -->
+                      <!-- <span class="check_1" [hidden]="!c1" ><img src="/assets/images/icons/checked.png" height=10 /> </span> -->
+                      <span fxFlex="33.3" [fxFlex.gt-sm]="viewCol" fxFlex.sm="50" >
+                        <span class="check_1" [hidden]="!c1" ><img src="/assets/images/icons/checked.png" height=10 /> </span>
+                        <img class="img_1" src="{{this.category_image_1}}" (click)="category1(category_name_1)"/>
+                      </span>
+
+                      <span fxFlex="33.3" [fxFlex.gt-sm]="viewCol" fxFlex.sm="50" >
+                        <span class="check_2" [hidden]="!c2" ><img src="/assets/images/icons/checked.png" height=10 /> </span>
+                        <img class="img_2" src="{{this.category_image_2}}" (click)="category2(category_name_2)"/>
+                      </span>
+
+                      <span fxFlex="33.3" [fxFlex.gt-sm]="viewCol" fxFlex.sm="50" >
+                        <span class="check_3" [hidden]="!c3" ><img src="/assets/images/icons/checked.png" height=10 /> </span>
+                        <img class="img_3" src="{{this.category_image_3}}" (click)="category3(category_name_3)"/>
+                      </span>
+                  </div>
+
+                    <!-- <app-category-list [categories]="categories" [categoryParentId]="0" (change)="onChangeCategory($event)"></app-category-list> -->
+            </mat-expansion-panel>
+            <mat-expansion-panel class="mat-elevation-z0" >
+                    <!-- <br> -->
+                    <mat-expansion-panel-header>
+                          <mat-panel-title>
+                            <div class="heads">{{brandSelected}}</div>
+                          </mat-panel-title>
+                        </mat-expansion-panel-header>
+                      <!-- <br> -->
+
+                      <div fxLayout="row wrap" style="white-space:nowrap; overflow:hidden; text-overflow:clip; ">
+                          <span fxFlex="100" [fxFlex.gt-sm]="viewCol" fxFlex.sm="50" class="col">
+                            <div *ngFor="let brand of brand1" class="brands1" fxFlex.sm="50">
+                            <mat-checkbox  class="chc" color="warn" [(ngModel)]="brand.checked" name="checkbr" [value]="brand.brandName"  (ngModelChange)="checkbrand(brand.brandName)" >{{brand.brandName}} </mat-checkbox>
+                          </div>
+                           </span>
+                          <span fxFlex="100" [fxFlex.gt-sm]="viewCol" fxFlex.sm="50" class="col">
+                              <div *ngFor="let brand of brand2" class="brands2"  fxFlex.sm="50">
+                              <mat-checkbox  class="chc1" color="warn" [(ngModel)]="brand.checked" name="checkbr" [value]="brand.brandName"  (ngModelChange)="checkbrand(brand.brandName)" style="margin-left:20px">{{brand.brandName}} </mat-checkbox>
+                            </div>
+                          </span>
+                      </div>
+
+
+
+
+
+                      <!-- <mat-grid-list cols="1" rowHeight="5:1">
+                        <mat-grid-tile   *ngFor="let brand of brands" fxFlex.sm="50"> -->
+                      <!-- <input type="checkbox" class="titles1" id="brands" placeholder=""="brand.brandName"> -->
+                      <!-- <input type="checkbox" name="brand.brandName"  />{{brand.brandName}} -->
+                        <!-- <mat-checkbox  class="chc" color="warn" [(ngModel)]="brand.checked" name="checkbr" [value]="brand.brandName"  (ngModelChange)="checkbrand(brand.brandName)" style="margin-left:5px">{{brand.brandName}} </mat-checkbox>
+                      </mat-grid-tile>
+
+                      </mat-grid-list> -->
+
+            <!-- <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="filter-brands">
+                <button  *ngFor="let brand of brands">
+                  <mat-checkbox color="warn" [(ngModel)]="brand.checked" name="checkbr" [value]="brand.brandName" (ngModelChange)="checkbrand(brand.brandName)">
+                    <label>
+                      <img [src]="brand.picture" class="images">
+                     </label>
+                   </mat-checkbox>
+                </button>
+            </div> -->
+          </mat-expansion-panel>
+
+
+            <mat-expansion-panel class="mat-elevation-z0" >
+                      <!-- <br> -->
+                      <mat-expansion-panel-header>
+                            <mat-panel-title>
+                        <div class="heads">{{priceRange}}</div>
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                        <div fxLayout="row" fxLayoutAlign="space-between center" class="text-muted">
+                            <!-- <span>From </span>
+                            <span>To </span> -->
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between center" class="text-muted">
+                          <input type="number" placeholder="Starting" style="font-size: 90%; padding: 1.5%; width:35%; height:30%; font-family:proxr; color: #5a555e; " [(ngModel)]="price_from" [ngModelOptions]="{standalone: true}"(ngModelChange)="pricefrom($event)"> to
+                          <input type="number" placeholder="Ending" style="font-size: 90%; padding: 1.5%; width:32% ; height:30%; font-family:proxr; color: #5a555e; margin-left:-2%" [(ngModel)]="price_to" [ngModelOptions]="{standalone: true}"(ngModelChange)="priceto(price_to)">
+
+                        </div>
+                        <!-- <button (click)="openmap()">open dialog </button> -->
+
+
+
+
+
+                <!-- <div fxLayout="row" fxLayoutAlign="space-between center" class="text-muted">
+                    <span>From: <b style="color:#156dbf">${{priceFrom_1}}</b></span>
+                    <span>To: <b>${{priceTo_1}}</b></span>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between center" class="filter-price">
+                    <mat-slider max="1000" min="1" thumb-label="true" [(ngModel)]="priceFrom_1" [value]="priceFrom"></mat-slider>
+                    <mat-slider max="10000" min="1000" thumb-label="true" [(ngModel)]="priceTo_1" [value]="priceTo"></mat-slider>
+                </div> -->
+            </mat-expansion-panel>
+
+              <!-- <mat-expansion-panel expanded>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h4>Color</h4>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="filter-buttons">
+                  <button mat-raised-button *ngFor="let color of colors" [style.background]="color" (click)="colorpick(color)" [(ngModel)]="color_1" [value]="color" ngDefaultControl > &nbsp; </button>
+                </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel expanded>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h4>Storage</h4>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="filter-buttons">
+                    <button mat-raised-button *ngFor="let storage of storages" (click)="storagepick(storage)" [(ngModel)]="storage_1" [value]='storage+" GB"' ngDefaultControl>{{storage}} GB</button>
+                </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel expanded>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h4>Condition</h4>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div fxLayout="column" *ngFor="let condition of conditions">
+                    <mat-checkbox color="warn"[(ngModel)]="condition.checked" name="checkis" [value]="condition._id" (ngModelChange)="checkconditions(condition._id)">
+                      <label>{{condition.title}}</label>
+                    </mat-checkbox> -->
+                    <!-- <mat-checkbox color="primary">New</mat-checkbox>
+                    <mat-checkbox color="primary">Used</mat-checkbox>
+                    <mat-checkbox color="primary">Not Specified</mat-checkbox> -->
+                <!-- </div> -->
+
+            <!-- </mat-expansion-panel> -->
+
+
+            <br>
+            <!-- <mat-expansion-panel expanded> -->
+                <!-- <mat-expansion-panel-header> -->
+                    <!-- <mat-panel-title> -->
+
+                      <!-- <button mat-raised-button class="post_but" (click)="submit(priceFrom_1,priceTo_1)" style="background-color:#156dbf; border-radius: 7px 7px 7px 7px;color:white ; "> Search</button> -->
+                      <!-- <button (click)="sendMessage()">Send Message</button> -->
+
+                    <!-- </mat-panel-title> -->
+                <!-- </mat-expansion-panel-header> -->
+                <!-- <div fxLayout="row wrap" fxLayoutAlign="center center">
+                   <a [routerLink]="['/products/electronics']"><img src="assets/images/products/probook/2-medium.png" alt="" class="mw-100"></a>
+                </div> -->
+
+            <!-- </mat-expansion-panel> -->
+        </mat-accordion>
+
+    </mat-sidenav>
+    <mat-sidenav-content class="all-products" ngClass.gt-sm="p-left" style="padding-left: 5%;padding-right:5%">
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
+            <span style="font-family:proxs"> Listing {{this.ads}} Ads </span>
+          <button mat-raised-button class="post_but" style="background-color:#156dbf; border-radius: 7px 7px 7px 7px;color:white; font-family:proxs" (click)="adrouter()"> Post an Ad</button>
+
+        </div>
+        <div style="margin-top:3%;"> </div>
+
+        <div *ngIf="viewType == 'grid'" fxLayout="row wrap" class="products-wrapper">
+            <div *ngFor="let product of products | paginate: { itemsPerPage: count, currentPage: page }" fxFlex="100" [fxFlex.gt-sm]="viewCol" fxFlex.sm="50" fxFlex.md="50" class="col">
+                <mat-card class="product-item text-center" style="padding:0%; margin-left: 1.5%; border-radius:2px 2px 2px 2px;box-shadow:5px 6px 6px #bfbdc1; white-space:nowrap; overflow:hidden; width:95%; text-overflow:ellipsis; transform:translateZ(100%)" >
+
+                    <span *ngIf="product.boosted" class="boosted">BOOSTED </span>
+                    <a [routerLink]="['/products', product._id, product.isFavourite]" class="image-link" >
+                      <img src="{{product.pictures[0] || placeHolder}}" />
+                        <span class="title_p">{{product.title}}</span>
+                    </a>
+                    <span class="pad">
+                    <span class="title_d" style="" text-wrap>{{product.description}}</span>
+                    <span class="title_s" *ngIf = "product.storage">
+                      <img class="memory_icon" style="margin-bottom:-5%" src="assets/images/icons/memory.png" />
+                      {{product.storage}}
+                    </span>
+                    <span *ngIf="!product.user_id._id != this.myid" class="title_h">
+                    <span *ngIf="!product.isFavourite"><button mat-icon-button matTooltip="Add to Favourites" (click)="addtofavourites(product.isFavourite, product._id)"><mat-icon style="color:#a40000">favorite_border</mat-icon></button></span>
+                    <span *ngIf="product.isFavourite"><button mat-icon-button (click)="addtofavourites(product.isFavourite, product._id)"><mat-icon style="color:#a40000">favorite</mat-icon></button></span>
+                  </span>
+                    <span class="title_c" *ngIf = "product.color">
+                      <img class="colour_icon" style="margin-bottom:-5%" src="assets/images/icons/colour.png" />
+                      {{product.color}}
+                    </span>
+
+
+                    <span  *ngIf="this.mycurrency != undefined" class="title_pkr"> {{this.mycurrency}} </span>
+                      <span *ngIf="this.mycurrency == undefined" class="title_pkr"> USD </span>
+                      <span class="title_pr">{{product.price}}</span>
+                    <!-- <span class="title_pkr"> USD
+                      <span class="title_pr">{{product.price}}</span>
+                    </span> -->
+                  </span>
+
+                </mat-card>
+            </div>
+        </div>
+
+        <div *ngIf="viewType == 'list'" fxLayout="row wrap" class="products-wrapper">
+            <div  *ngFor="let product of products | paginate: { itemsPerPage: count, currentPage: page }" fxFlex="100" class="col">
+              <mat-card class="product-item text-center">
+                  <mat-chip-list >
+                      <mat-chip color="warn" selected="true">${{product.price | number : '1.2-2'}}</mat-chip>
+                  </mat-chip-list>
+                  <a [routerLink]="['/products', product._id, product.title]" class="image-link">
+                      <img [src]="product.pictures[0]" alt="" >
+                  </a>
+                  <a [routerLink]="['/products', product._id, product.title]" class="title text-truncate">
+                      {{product.title}}
+                  </a>
+                  <div fxLayout="row" fxLayoutAlign="space-between center" class="prices">
+                      <div fxLayout="column" fxLayoutAlign="center start">
+                          <p class="new-price">{{product.color}}</p>
+                      </div>
+                      <app-rating [ratingsCount]="product.ratingsCount" [ratingsValue]="product.ratingsValue" [direction]="'column'"></app-rating>
+                  </div>
+                  <div class="divider mt-2"></div>
+                  <div class="icons">
+                      <app-controls [product]="product" (onOpenProductDialog)="openProductDialog(product)"></app-controls>
+                  </div>
+              </mat-card>
+            </div>
+        </div>
+        <div></div>
+
+        <div *ngIf="products.length > 0" fxLayout="row wrap">
+            <div fxFlex="100" fxShow.gt-xs fxLayoutAlign="center center">
+                    <pagination-controls class="product-pagination" autoHide="true" maxSize="20" (pageChange)="onPageChanged($event)"></pagination-controls>
+            </div>
+        </div>
+
+    </mat-sidenav-content>
+</mat-sidenav-container>
+</div>
+<div>
+<div [hidden]="!searchmap">
+
+    <div class="container-fluid" style="margin-top:1%; margin-left:10%"  >
+      <div class='row'>
+        <div class="form-group">
+          <input class='title_area1' (change)="updateOnMap(location.address_level_2)" placeholder="Enter City" [(ngModel)]='location.address_level_2'/>
+        </div><br>
+        <!-- <div class="form-group">
+          <input class='title_area1' (change)="updateOnMap()" placeholder="Enter Country" [(ngModel)]='location.address_country'/>
+        </div><br> -->
+
+      </div>
+    </div>
+
+  <div style="box-shadow:5px 6px 6px #bfbdc1; margin-left:30%; width:40%">
+    <agm-map [(latitude)]="this.latitude" [(longitude)]="this.longitude" [(zoom)]="location.zoom" [disableDefaultUI]="true" [zoomControl]="true" [(fitBounds)]='location.viewport' >
+      <agm-marker [(latitude)]="this.latitude" [(longitude)]="this.longitude" [markerDraggable]="location.marker.draggable" (dragEnd)='markerDragEnd($event)' ></agm-marker>
+
+    </agm-map>
+
+  </div>
+
+    <div style="text-align:center; margin-top:3%;">
+      <button mat-raised-button (click)="advertlocation()" type="submit" style="border:1px solid; border-color:#156dbf; color:#156dbf; border-radius: 7px 7px 7px 7px;font-size:150%; height:60%; padding-top: 0.5%;padding-bottom: 0.5%; width:15%"> Update </button>
+
+    </div>
+
+</div>
+</div>

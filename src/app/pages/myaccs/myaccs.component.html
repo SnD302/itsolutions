@@ -1,0 +1,615 @@
+
+  <mat-toolbar-row fxLayoutAlign="space-between center"  class="top-toolbar theme-container" style="background-color:#156dbf; max-width:100% !important; height:40px">
+      <span fxHide="false" fxHide.gt-sm>
+          <button mat-button (click)="sidenav.toggle()" class="sidenav-toggle" >
+              <mat-icon>menu</mat-icon>
+          </button>
+      </span>
+      <span fxShow="false" fxShow.gt-xs fxLayoutAlign="center center"></span>
+      <span fxShow="false" fxShow.gt-sm></span>
+      <app-top-menu style="margin-right:1%"></app-top-menu>
+  </mat-toolbar-row>
+  <div class="form_view" >
+
+<mat-toolbar-row fxLayoutAlign="space-between center" class="logo-toolbar theme-container" style="background-color:#FFFFFF">
+    <!-- <a  routerLink="/"  (click) ="closeSubMenus()">
+    <img src="assets/images/icons/logo.png" height=100 class="logo" style="margin-left:50%;"/>
+  </a> -->
+  <span class="logo" style="font-size:140%; font-family: proxs; color:#342d38; margin-left:5%; margin-top:-5%; cursor:pointer" (click)="adrouterhome()">
+     Back to Home
+   </span>
+
+  <div style="margin-left: -50%; margin-top:-3%;">
+    <span class="head" [hidden]="!headi">
+    {{this.headings}}
+  </span>
+  <!-- <span class="head" [hidden]="!head_m">
+  Messages
+</span>
+<span class="head" [hidden]="!head_o">
+Offers
+</span>
+<span class="head" [hidden]="!head_f">
+Favourites
+</span>
+<span class="head" [hidden]="!head_he">
+Help
+</span> -->
+<span class="head" style="margin-left:-5%" [hidden]="!head_a">
+Account Settings
+</span>
+</div>
+
+  <!-- <div class="upper" [hidden]="!hist_but">
+    <button mat-button class="first" (click)="showadds()">My Ads</button>
+    <button mat-button class="second1" (click)="myPurchases()">Purchases</button>
+  </div> -->
+  <div class="upper" [hidden]="!offer_but">
+    <button mat-button class="first" (click)="offersbyme()">Sent</button>
+    <button mat-button class="second1" (click)="myaddsoffers()">Received</button>
+  </div>
+  <button mat-raised-button class="post_but" style="background-color:#156dbf; border-radius: 7px 7px 7px 7px;color:white;" (click)="adrouter()"> Post Ad</button>
+
+</mat-toolbar-row>
+
+<span class="new_price" [hidden]="!hid">
+  <input type="number" [(ngModel)]="price">
+  <button (click)="submitPrice(price)">Submit</button>
+  <button (click)="cancel()">Cancel</button>
+</span>
+<mat-sidenav-container fxLayoutAlign="space-between center"  class="top-toolbar theme-container" style="background-color:#FFFFFF">
+
+
+    <mat-sidenav #sidenav [opened]="sidenavOpen" [mode]="sidenavOpen ? 'side' : 'over'" class="account-sidenav" perfectScrollbar>
+
+
+        <mat-nav-list class="mat-elevation-z0 h-100">
+          <mat-list-item  (click)="adrouterhome()">
+              <img src="assets/images/icons/home.png" class="icons" matListIcon style="border-radius:0%; height:16px; width:16px"/>
+              <a matLine  routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}" style="cursor:pointer">Home</a>
+          </mat-list-item>
+
+            <mat-list-item  (click)="showadds()">
+                <img src="assets/images/icons/myads.png" class="icons" matListIcon style="border-radius:0%; height:16px; width:16px">
+                <a matLine  routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}" style="cursor:pointer">My Ads</a>
+            </mat-list-item>
+            <mat-list-item  (click)="myPurchases()">
+                <img src="assets/images/icons/purchases.png" class="icons" matListIcon style="border-radius:0%; height:16px; width:16px">
+                <a matLine  routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}" style="cursor:pointer">My Purchases</a>
+            </mat-list-item>
+            <mat-list-item (click)="getAllChats()">
+              <img src="assets/images/icons/envelope.png" class="icons" matListIcon style="border-radius:0%; height:16px; width:16px">
+
+                <a matLine  routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}" style="cursor:pointer">Messages</a>
+            </mat-list-item>
+
+            <mat-list-item (click)="offersbyme()">
+              <img src="assets/images/icons/shopping.png" class="icons" matListIcon style="border-radius:0%; height:16px; width:16px">
+
+                <a matLine  routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">Offers</a>
+            </mat-list-item>
+
+            <mat-list-item (click)="favouriteadds()">
+              <img src="assets/images/icons/heart.png" class="icons" matListIcon style="border-radius:0%; height:16px; width:16px">
+
+                <a matLine  routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}" style="cursor:pointer">Favourites</a>
+            </mat-list-item>
+            <mat-list-item>
+              <img src="assets/images/icons/information.png" class="icons" matListIcon style="border-radius:0%; height:16px; width:16px">
+
+                <a matLine  routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}" style="cursor:pointer">Help</a>
+            </mat-list-item >
+            <mat-list-item (click)="acc_s()">
+              <img src="assets/images/icons/settings.png" class="icons" matListIcon style="border-radius:0%; height:16px; width:16px">
+
+                <a matLine  routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}" style="cursor:pointer">Account Settings</a>
+            </mat-list-item>
+          </mat-nav-list>
+
+    </mat-sidenav>
+    <mat-sidenav-content class="account-content" ngClass.gt-sm="p-left" style="max-width:80% !important">
+
+      <div [hidden]="!adds">
+
+
+      <div *ngFor="let myad of myadd" class="adds_view">
+      <a [routerLink]="['/products', myad._id, myad.title]" class="title text-truncate">
+        <img [src]="myad.pictures[0]" class="pictures" style="cursor:pointer">
+      </a>
+
+<!-- /*
+created by sherry
+*/ -->
+
+<!-- <span class="title_p">{{myad.username}}</span>
+<span class="title_p">{{myad.offered_price}}</span>
+(click)="openOfferDetails(myad)" -->
+
+<!-- /*
+created by sherry
+also added click function on title span below
+*/ -->
+
+
+
+
+      <span class="title_p">{{myad.title}}</span>
+      <span class="title_d">{{myad.description}}</span>
+      <span class="title_s">
+        <img class="memory_icon" src="assets/images/icons/memory.png" />
+        <span class="title_s1"> &nbsp;{{myad.storage}}</span>
+
+      </span>
+      <span class="title_c">
+        <img class="colour_icon" src="assets/images/icons/colour.png" />
+        <span class="title_c1"> &nbsp;{{myad.color}}</span>
+      </span>
+
+      <span [hidden]="!pkr">
+      <span class="title_pkr" [hidden]="!pkr"> {{this.mycurrency}} </span>
+        <span class="title_pr" >{{myad.price}}</span>
+        </span>
+
+      <span [hidden]="!off_pr">
+      <span class="title_pkr" [hidden]="!off_pr"> Offered:</span>
+        <span class="title_pri" >{{myad.offered_price}}</span>
+      </span>
+
+
+      <!-- <span [hidden]= "!msg"><mat-icon class="msgs">mail_outline</mat-icon></span> -->
+      <!-- <span class="createat" [hidden]= "!offer_create" >{{myd.createdAt}} </span> -->
+      <span [hidden]= "!disable">
+      <span *ngIf="myad.visible" style="color:#f41b23; float:right;" >
+        <mat-icon (click)="enabledisable(myad._id)" style="font-size:120%; margin-right:-7px">cancel </mat-icon>
+      </span>
+        <span *ngIf="!myad.visible" style="color:green; float:right;">
+          <mat-icon (click)="enabledisable(myad._id)" style="font-size:120%; margin-right:-7px">check </mat-icon>
+        </span>
+      </span>
+
+      <span [hidden]= "!boost"><img src="\assets\images\boost.png" class="boost" (click)="boostad(myad._id)"/></span>
+
+    <span [hidden]= "!status_but">
+      <span *ngIf="myad.status ==='accepted'">
+      <button mat-raised-button ngDefaultControl class="status_but" style="background-color:#156dbf; border-radius: 7px 7px 7px 7px;color:white;" [(ngModel)]="myad.sail_id" [value]="myad.sail_id"  (click)="afteraccepted(myad.sail_id)">{{myad.status}}</button>
+    </span>
+    <span *ngIf="myad.status ==='pending'">
+      <button mat-raised-button ngDefaultControl class="status_but1" [(ngModel)]="myad.sail_id" [value]="myad.sail_id" style="background-color:#156dbf; border-radius: 7px 7px 7px 7px;color:white;"  (click)="updateoffer(myad.createdOffer)">Edit</button>
+      <button mat-raised-button ngDefaultControl class="status_but2" [(ngModel)]="myad.sail_id" [value]="myad.sail_id" style="border-color:#156dbf; border-radius: 7px 7px 7px 7px; color:#156dbf"  (click)="deleteoffer(myad.createdOffer,myad._id)">Delete</button>
+    </span>
+    <span *ngIf="myad.status ==='rejected'">
+      <span style="color:#156dbf; float:right">
+        rejected
+      </span>
+    </span>
+  </span>
+  <span [hidden]= "!favour_but">
+    <span style="color:#f41b23; float:right;">
+      <mat-icon (click)="addtofavourites(myad._id)" style="font-size:130%; margin-right:-7px">cancel </mat-icon>
+    </span>
+    <span *ngIf="!myad.sold">
+      <a [routerLink]="['/products', myad._id, myad.title]" class="title text-truncate">
+    <button mat-raised-button ngDefaultControl class="sold_but" style="background-color:#156dbf; border-radius: 7px 7px 7px 7px;color:white;"  >AVAILABLE</button>
+  </a>
+  </span>
+  <span *ngIf="myad.sold">
+    <button mat-raised-button ngDefaultControl class="sold_but" style="border:1px solid; border-color:#156dbf; border-radius: 7px 7px 7px 7px; color:#156dbf;" >SOLD</button>
+  </span>
+</span>
+  <span [hidden]="!off_rc">
+    <button mat-raised-button ngDefaultControl class="sold_but" style="background-color:#156dbf; border-radius: 7px 7px 7px 7px;color:white;"  (click)="openOfferDetails(myad)">Check</button>
+</span>
+<span [hidden]= "!status_but1">
+  <span *ngIf="myad.status ==='pending'">
+  <button mat-raised-button ngDefaultControl class="status_but1" (click)="accept_reject(myad._id)" style="background-color:#156dbf; border-radius: 7px 7px 7px 7px;color:white;">Accept</button>
+</span>
+<span *ngIf="myad.status ==='pending'">
+  <button mat-raised-button ngDefaultControl class="status_but2" (click)="accept_reject1()" style="border-color:#156dbf; border-radius: 7px 7px 7px 7px; color:#156dbf;">Reject</button>
+</span>
+<span *ngIf="myad.status ==='accepted'">
+  <button mat-stroked-button ngDefaultControl class="status_but1" (click)="status_seller(myad.sail_id)" style="border-color:#156dbf; border-radius: 7px 7px 7px 7px; color:#156dbf;">Status</button>
+</span>
+</span>
+
+
+      <!-- <span class="deactivate" [hidden]= "!deactivate">deactivate ad X </span> -->
+      <span *ngIf="myad.status ==='accepted'"><span class="proceed" [hidden]= "!proceed" >Proceed To Payment </span>
+    </span>
+
+    </div>
+
+      </div>
+      <div [hidden]="!chat" class="acc_div">
+
+        <div *ngFor="let cha of chats" class="chat_view" >
+          <div>
+            <span class="img_div" >
+              <img src={{cha.messageFrom.profilePicture}} height="60" width="60" class="user_img" style="border-radius:50%;" (click)="getAllMessages(cha.messageFrom._id,cha.advert_id._id)"/>
+              <span class="chat_head">
+              {{cha.messageFrom.name}}
+            </span>
+            <span class="chat_time">
+              {{this.full}}
+            </span>
+          </span>
+          <div class="chat_title">
+          <i>For {{cha.advert_id.title}}</i>
+        </div>
+        <div class="chat_det">
+          {{cha.message}}
+         </div>
+      </div>
+      <div class="divider"></div>
+      </div>
+    </div>
+
+      <div [hidden]="!msg" class="acc_div">
+        <div style=" margin-bottom:2%;height:70px; width: 500px; background-color:#f2f2f2" >
+          <span class="img_div" >
+            <img src={{this.adpictures}} height="60" width="60" class="user_img" style="border-radius:50%;"/>
+            <span class="chat_head">
+          {{this.adTitle}}
+          </span>
+          <div *ngIf="!this.offerstatus && this.mymatchedad == 'notmatched'" style="float:right;">
+            <button mat-raised-button ngDefaultControl class="buy_but" (click)="mk_offr()" style="background-color:#156dbf; border-radius: 7px 7px 7px 7px;color:white;margin-top:15px; margin-right:10px" >
+              MAKE OFFER
+            </button>
+          </div>
+          <div *ngIf="this.offerstatus == 'pending' && this.mymatchedad == 'notmatched'" style="float:right;">
+
+            <a mat-button [matMenuTriggerFor]="accountMenu" #accountMenuTrigger="matMenuTrigger" style="font-family:proxr">
+                <span fxShow="false" fxShow.gt-sm>
+                  <button mat-raised-button ngDefaultControl class="buy_but" (click)="mk_offr()" style="background-color:#156dbf; border-radius: 7px 7px 7px 7px;color:white;margin-top:15px; margin-right:10px" >
+                    ACTIONS
+                  </button>
+                </span>
+            </a>
+            <mat-menu #accountMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="app-dropdown account" style="font-family:proxr">
+                <span (mouseleave)="accountMenuTrigger.closeMenu()">
+                    <div class="divider"></div>
+                    <span mat-menu-item>
+                        <span style="font-family:proxr" (click)="mk_offr()" >UPDATE OFFER</span>
+                    </span>
+                    <!-- <span mat-menu-item>
+                        <span style="font-family:proxr" (click)="accept()">ACCEPT</span>
+                    </span>
+                    <span mat-menu-item>
+                        <span style="font-family:proxr" (click)="reject()">REJECT</span>
+                    </span> -->
+
+
+                    <div class="divider"></div>
+
+                </span>
+            </mat-menu>
+          </div>
+          <span *ngFor="let stat of offersbyseller">
+          <div *ngIf="this.mymatchedad == 'matchedad' && stat.user_id == this.messageuserid && stat.status == 'rejected'" style="float:right;">
+          <button mat-raised-button ngDefaultControl class="buy_but" style="background-color:#156dbf; border-radius: 7px 7px 7px 7px;color:white;margin-top:15px; margin-right:10px" >
+            REJECTED
+          </button>
+          </div>
+          <div *ngIf="this.mymatchedad == 'matchedad' && stat.user_id == this.messageuserid && stat.status == 'accepted'" style="float:right;">
+          <button mat-raised-button ngDefaultControl class="buy_but"  style="background-color:#156dbf; border-radius: 7px 7px 7px 7px;color:white;margin-top:15px; margin-right:10px" >
+            Accepted
+          </button>
+          </div>
+        </span>
+          <div *ngIf="this.offerstatus == 'rejected' && this.mymatchedad == 'notmatched'" style="float:right;">
+
+            <button mat-raised-button ngDefaultControl class="buy_but"  style="background-color:#156dbf; border-radius: 7px 7px 7px 7px;color:white;margin-top:15px; margin-right:10px" >
+              REJECTED
+            </button>
+
+          </div>
+          <div *ngIf="this.offerstatus == 'accepted' && this.mymatchedad == 'notmatched'" style="float:right;">
+
+            <button mat-raised-button ngDefaultControl class="buy_but"  style="background-color:#156dbf; border-radius: 7px 7px 7px 7px;color:white;margin-top:15px; margin-right:10px" >
+              ACCEPTED
+            </button>
+
+          </div>
+
+          <div *ngIf="this.offerstatus == 'counter' && this.mymatchedad == 'notmatched'" style="float:right;">
+
+            <a mat-button [matMenuTriggerFor]="accountMenu" #accountMenuTrigger="matMenuTrigger" style="font-family:proxr">
+                <span fxShow="false" fxShow.gt-sm>
+                  <button mat-raised-button ngDefaultControl class="buy_but" (click)="mk_offr()" style="background-color:#156dbf; border-radius: 7px 7px 7px 7px;color:white;margin-top:15px; margin-right:10px" >
+                    ACTIONS
+                  </button>
+                </span>
+            </a>
+            <mat-menu #accountMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="app-dropdown account" style="font-family:proxr">
+                <span (mouseleave)="accountMenuTrigger.closeMenu()">
+                    <div class="divider"></div>
+                    <span mat-menu-item>
+                        <span style="font-family:proxr" (click)="mk_offr()" >RE-COUNTER</span>
+                    </span>
+                    <span mat-menu-item>
+                        <span style="font-family:proxr" (click)="accept()">ACCEPT</span>
+                    </span>
+                    <span mat-menu-item>
+                        <span style="font-family:proxr" (click)="reject()">REJECT</span>
+                    </span>
+
+
+                    <div class="divider"></div>
+
+                </span>
+            </mat-menu>
+          </div>
+          <span *ngFor= "let stat of offersbyseller">
+          <div *ngIf="this.mymatchedad == 'matchedad' && stat.user_id == this.messageuserid && stat.status == 'pending' || stat.status =='re-counter'" style="float:right;">
+
+            <a mat-button [matMenuTriggerFor]="accountMenu" #accountMenuTrigger="matMenuTrigger" style="font-family:proxr">
+                <span fxShow="false" fxShow.gt-sm>
+
+                  <button mat-raised-button ngDefaultControl class="buy_but" (click)="mk_offr()" style="background-color:#156dbf; border-radius: 7px 7px 7px 7px;color:white;margin-top:15px; margin-right:10px" >
+                    ACTIONS
+                  </button>
+                </span>
+            </a>
+            <mat-menu #accountMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="app-dropdown account" style="font-family:proxr">
+                <span (mouseleave)="accountMenuTrigger.closeMenu()">
+                    <div class="divider"></div>
+                    <span mat-menu-item>
+                        <span style="font-family:proxr" (click)="mk_offr()" >COUNTER OFFER</span>
+                    </span>
+                    <span mat-menu-item>
+                        <span style="font-family:proxr" (click)="acceptseller(stat._id)">ACCEPT</span>
+                    </span>
+                    <span mat-menu-item>
+                        <span style="font-family:proxr" (click)="rejectseller(stat._id)">REJECT</span>
+                    </span>
+
+
+                    <div class="divider"></div>
+
+                </span>
+            </mat-menu>
+          </div>
+        </span>
+
+          <!-- <div *ngFor="let my of offersMatched">
+            {{my.status}}
+          </div> -->
+          <div style="  font-family: proxr;margin-left: 20%;color: #5a555e">
+            {{this.adcolor}}
+            - {{this.adstorage}}
+          </div>
+          <div style="  font-family: proxr;margin-left: 20%;color: #5a555e" *ngIf="this.mymatchedad == 'notmatched'">
+            Offered Price is: {{this.matchedofferprice}}
+          </div>
+          <span *ngFor= "let stat of offersbyseller">
+          <div style="  font-family: proxr;margin-left: 20%;color: #5a555e" *ngIf="this.mymatchedad == 'matchedad' && stat.user_id == this.messageuserid && stat.status == 'pending' || stat.status =='re-counter' || stat.status =='rejected'">
+            Offered Price is: {{stat.offered_price}}
+          </div>
+        </span>
+
+        </span>
+
+        </div>
+        <div class="text-center" style="height:300px;width: 500px;overflow:scroll; overflow-x:hidden" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+      <ng-container *ngFor="let msg of messages" class="message_view" >
+        <ng-container *ngIf="msg.messageFrom != this.myuserid" text-wrap>
+
+      <p mat-line class="mymessages"> {{msg.message}} </p>
+
+        </ng-container>
+
+        <ng-container *ngIf="msg.messageFrom == this.myuserid" text-wrap>
+
+              <p mat-line class="hismessages"  > {{msg.message}}</p>
+
+
+        </ng-container>
+
+      </ng-container>
+    </div>
+      <div>
+      <input type="text" class="title_area" id="title" [(ngModel)]="chat_msg" maxlength="100" > <mat-icon style="float:right;margin-top:8%" (click)="sendMessagechat(chat_msg)">message</mat-icon>
+    </div>
+
+
+
+    </div>
+
+    <div class="main_screen" [hidden]="!offer_view">
+      <div class="make_offer" *ngIf="this.myid != this.aduserid && this.mymatchedad == 'notmatched'" >
+          <span class="fw-500">
+            <!-- <label for="make-offer" class="titles" id="make-offer">Make Offer</label><br>
+            <input type="number" class="offer_box" step="100" required [(ngModel)]="make_offer" [ngModelOptions]="{standalone: true}" [value]="make_offer"/><br> -->
+            <label for="make-offer" class="titles_off" id="make-offer" style="font-family: proxr;">Make Offer</label><br>
+            <input type="number" class="offer_box" step="100" required [(ngModel)]="make_offer" [ngModelOptions]="{standalone: true}" [value]="make_offer" style="font-family: proxr; font-size:200%; border-radius:7px 7px 7px 7px;"/><br>
+          </span>
+          <button mat-stroked-button class="offer_but" id="make-offer" (click)="makeoffer(make_offer)" style="font-family: proxs; background-color:#156dbf; border-radius: 7px 7px 7px 7px; color:white;"> OFFER</button>
+          <button mat-stroked-button ngDefaultControl class="cancel" (click)="canceloffer()" style="font-family: proxs; border-color:#156dbf; border-radius: 7px 7px 7px 7px; color:#156dbf; margin-left:10%">CANCEL</button>
+
+      </div>
+      <div class="make_offer" *ngIf="this.offerstatus == 'pending' && this.mymatchedad == 'notmatched'" >
+          <span class="fw-500">
+            <!-- <label for="make-offer" class="titles" id="make-offer">Make Offer</label><br>
+            <input type="number" class="offer_box" step="100" required [(ngModel)]="make_offer" [ngModelOptions]="{standalone: true}" [value]="make_offer"/><br> -->
+            <label for="make-offer" class="titles_off" id="make-offer" style="font-family: proxr;">Update Offer</label><br>
+            <input type="number" class="offer_box" step="100" required [(ngModel)]="make_offer" [ngModelOptions]="{standalone: true}" [value]="make_offer" style="font-family: proxr; font-size:200%; border-radius:7px 7px 7px 7px;"/><br>
+          </span>
+          <button mat-stroked-button class="offer_but" id="make-offer" (click)="updateofferchat(make_offer)" style="font-family: proxs; background-color:#156dbf; border-radius: 7px 7px 7px 7px; color:white;"> OFFER</button>
+          <button mat-stroked-button ngDefaultControl class="cancel" (click)="canceloffer()" style="font-family: proxs; border-color:#156dbf; border-radius: 7px 7px 7px 7px; color:#156dbf; margin-left:10%">CANCEL</button>
+
+      </div>
+      <div class="make_offer" *ngIf="this.offerstatus == 'counter' && this.mymatchedad == 'notmatched'" >
+          <span class="fw-500">
+            <!-- <label for="make-offer" class="titles" id="make-offer">Make Offer</label><br>
+            <input type="number" class="offer_box" step="100" required [(ngModel)]="make_offer" [ngModelOptions]="{standalone: true}" [value]="make_offer"/><br> -->
+            <label for="make-offer" class="titles_off" id="make-offer" style="font-family: proxr;">Re-Counter Offer</label><br>
+            <input type="number" class="offer_box" step="100" required [(ngModel)]="make_offer" [ngModelOptions]="{standalone: true}" [value]="make_offer" style="font-family: proxr; font-size:200%; border-radius:7px 7px 7px 7px;"/><br>
+          </span>
+          <button mat-stroked-button class="offer_but" id="make-offer" (click)="updateofferchat(make_offer)" style="font-family: proxs; background-color:#156dbf; border-radius: 7px 7px 7px 7px; color:white;"> OFFER</button>
+          <button mat-stroked-button ngDefaultControl class="cancel" (click)="canceloffer()" style="font-family: proxs; border-color:#156dbf; border-radius: 7px 7px 7px 7px; color:#156dbf; margin-left:10%">CANCEL</button>
+
+      </div>
+      <div class="make_offer" *ngIf="this.mymatchedad == 'matchedad' " >
+          <span class="fw-500">
+            <!-- <label for="make-offer" class="titles" id="make-offer">Make Offer</label><br>
+            <input type="number" class="offer_box" step="100" required [(ngModel)]="make_offer" [ngModelOptions]="{standalone: true}" [value]="make_offer"/><br> -->
+            <label for="make-offer" class="titles_off" id="make-offer" style="font-family: proxr;">Counter Offer</label><br>
+            <input type="number" class="offer_box" step="100" required [(ngModel)]="make_offer" [ngModelOptions]="{standalone: true}" [value]="make_offer" style="font-family: proxr; font-size:200%; border-radius:7px 7px 7px 7px;"/><br>
+          </span>
+          <button mat-stroked-button class="offer_but" id="make-offer" (click)="counterofferchat(make_offer)" style="font-family: proxs; background-color:#156dbf; border-radius: 7px 7px 7px 7px; color:white;"> OFFER</button>
+          <button mat-stroked-button ngDefaultControl class="cancel" (click)="canceloffer()" style="font-family: proxs; border-color:#156dbf; border-radius: 7px 7px 7px 7px; color:#156dbf; margin-left:10%">CANCEL</button>
+
+      </div>
+
+    </div>
+
+        <!-- <button mat-fab (click)="onClickUserInfo()">
+  <mat-icon>person</mat-icon>
+</button>
+<div class="chat-container">
+  <mat-card class="main-card">
+    <mat-list class="chat-list">
+      <mat-list-item >
+        <h4 mat-line>
+          <b>Danial</b>
+        </h4>
+        <p mat-line>
+          <span> I sent a message </span>
+        </p>
+
+      </mat-list-item>
+    </mat-list>
+    <div class="chat-footer-container">
+      <mat-icon>message</mat-icon>
+      <mat-form-field class="chat-input">
+        <input matInput
+               #inputMessage
+               maxlength="140"
+               placeholder="Type your message"
+               [(ngModel)]="messageContent"
+               (keyup.enter)="sendMessage(messageContent)">
+        <mat-hint align="end">{{inputMessage.value.length}}/140</mat-hint>
+      </mat-form-field>
+    </div>
+  </mat-card>
+</div> -->
+      <div [hidden]= "!acc" class="acc_div">
+      <div class="img_div">
+        <img src={{this.profilePicture}} height="80" width="80" class="user_img" style="border-radius:50%;"/>
+        <b class="name">
+        {{this.username}}
+      </b>
+      </div>
+      <span class="picture_area">
+      <label for="file">
+          <img src="assets\images\icons\camera.png" height="30" width="30" class="change_photo"/>
+      </label>
+      <input id="file" type="file" [value]="pictures" (change)="handleFileInput($event)" multiple />
+    </span>
+    <span *ngIf="file != null">
+      <button mat-stroked-button (click)="updateuserimage()" class="update_photo" style="border-color:#156dbf;border-radius:5px 5px 5px 5px; font-family:proxr"> Update</button>
+    </span>
+  <!-- <button mat-stroked-button class="change_photo" style="border-color:#156dbf;border-radius:5px 5px 5px 5px; font-family:proxr">Change Photo</button> -->
+
+      <!-- <input id="file" type="file" [value]="pictures" (change)="handleFileInput($event)" multiple /> -->
+      <div class="for_text">PNG or JPG, Maximum size 5MB. </div>
+      <div *ngFor="let pc of package">
+      <span class="package">{{pc.name}} </span>
+      <span class="upg" [hidden]="!up" (click)="updatepackage()"> Upgrade</span>
+      <span>
+      <img [src]="pc.picture" class="bar" />
+    </span>
+    </div>
+      <div class="edit_form" [hidden]="!pck" style="font-size:2.5vmin">
+        <span style="float:right;color:#156dbf" (click)="canceledit()"> Cancel<mat-icon> cancel </mat-icon></span>
+        <br>
+        <div *ngFor="let pac of packages">
+        <button mat-button class="package_names" [(ngModel)]="pac._id" [ngModelOptions]="{standalone: true}" (click)="setNewpack(pac._id)" style="float:left" required>{{pac.name}}</button>
+
+        <span>
+        <img [src]="pac.picture" class="bar" />
+      </span>
+      <div style="font-family:proxr;color: #342d38;">
+        <b>Boosts:</b>&nbsp;{{pac.boosts}} &nbsp; <b>AddCount:</b>&nbsp;{{pac.addCount}}
+      </div>
+      </div>
+      <button mat-stroked-button class="submit_but" style="border-color:#156dbf; border-radius: 7px 7px 7px 7px; color:#156dbf;" (click)="updateUserPackage()"> Update</button>
+      </div>
+      <!-- <div class="package">CELX BLUE </div> -->
+      <!-- <div style="float:right;color:#156dbf" [hidden]="!up" (click)="updatepackage()"> Update Package</div> -->
+
+
+    <div class="" style="font-family:proxr; margin-top:1%" [hidden]="!first">
+
+      <span style="float:right; color:#156dbf;font-size:90%" (click)="edituser()"> Edit Info<mat-icon style="font-size:100%"> edit </mat-icon></span>
+        <!-- <li><b>Change Password</b><span style="position:fixed; left:50%"> </span></li> -->
+        <b style="position:absolute">Name </b> <span style="position:absolute; left:25%">{{this.username}} </span><br><br>
+
+        <b style="position:absolute; margin-top:-15px">Email </b> <span style="position:absolute; left:25%; margin-top:-15px">{{this.useremail}} </span><br><br>
+
+        <b style="position:absolute; margin-top:-30px">Phone Number </b> <span style="position:absolute; left:25%; margin-top:-30px">{{this.mobile}} </span><br><br>
+
+        <b style="position:absolute; margin-top:-45px">Currency </b> <span style="position:absolute; left:25%; margin-top:-45px">{{this.usercurrency}} </span><br><br>
+
+        <b style="position:absolute; margin-top:-60px">Manage Payment Info </b> <span style="position:absolute; left:25%; margin-top:-60px">{{this.defaultCard}} </span><br><br>
+    </div>
+    <div class="edit_form" [hidden]="!user" style="font-size:2.5vmin">
+      <span style="float:right;color:#156dbf;font-size:90%" (click)="canceledit()"> Cancel<mat-icon style="font-size:100%"> cancel </mat-icon></span>
+
+    <b style="">Email </b> <span style="position:absolute; left:50%">{{this.useremail}} </span><br><br>
+    <b style="">Phone Number </b> <span style="position:absolute; left:50%">{{this.useremail}} </span><br><br>
+     <b style="">Name </b> <input  style="position:absolute; left:50%" type="text" placeholder="New Name" class="new_name" id="new_name"[(ngModel)]="new_name" [ngModelOptions]="{standalone: true}" [value]="new_name" required><br><br>
+     <b style="">Currency </b>
+     <!-- <input  style="position:absolute; left:50%" type="text" placeholder="New Currency" class="new_name" id="new_currency"[(ngModel)]="new_currency" [ngModelOptions]="{standalone: true}" [value]="new_currency" required><br><br> -->
+     <mat-select style="width:20%;position:absolute; left:50%" id="new_currency" [(ngModel)]="new_currency" [ngModelOptions]="{standalone: true}" required>
+       <mat-option *ngFor="let currency of enums" [value]="currency">
+       {{currency}}
+     </mat-option>
+   </mat-select><br><br>
+     <b style="">Manage Payment </b> <mat-icon style="position:absolute; left:50%; color:#156dbf" (click)="editpayment()"> build </mat-icon><br><br>
+     <b style="">Change Password </b><mat-icon style="position:absolute; left:50%; color:#156dbf" (click)="editpass()"> build </mat-icon><br><br>
+
+
+     <button mat-stroked-button class="submit_but" style="border-color:#156dbf; border-radius: 7px 7px 7px 7px; color:#156dbf;" (click)="updateUser(new_name,new_currency)"> Submit</button>
+
+    </div>
+
+      <form [formGroup]="passForm" (ngSubmit)="onpassFormSubmit(passForm.value)" [hidden]="!pass">
+        <span style="float:right;color:#156dbf; font-size:90%" (click)="canceledit()"> Cancel<mat-icon style="font-size:100%"> cancel </mat-icon></span>
+        <mat-form-field style="height:3%; width:50%">
+          <!-- <label>Old Password </label> -->
+      <input type="password" matInput placeholder="Old Password" class="pass" formControlName="old_pass" required><br><br>
+      <mat-error *ngIf="passForm.controls.old_pass.errors?.required" style="font-size:80%; ">Old pass is required</mat-error>
+      <mat-error *ngIf="passForm.controls.old_pass.hasError('minlength')" >Minimum length not reached</mat-error>
+    </mat-form-field>
+    <mat-form-field style="height:3%; width:50%">
+      <!-- <label>New Password </label> -->
+      <input type="password" matInput placeholder="New Password" class="pass" formControlName="new_pass" required><br><br>
+      <mat-error *ngIf="passForm.controls.new_pass.errors?.required" style="font-size:80%; ">New Pass is Required</mat-error>
+      <mat-error *ngIf="passForm.controls.new_pass.hasError('minlength')" >Minimum length of 6 characters</mat-error>
+    </mat-form-field>
+    <div style="color:red; font-family:proxs">{{this.mismatch}}</div>
+    <button mat-stroked-button class="submit_but" style="border-color:#156dbf; border-radius: 7px 7px 7px 7px; color:#156dbf;" (click)="onpassFormSubmit(passForm.value)"> Submit</button>
+    </form>
+
+    <div [hidden]="!pay">
+      <span style="float:right;color:#156dbf" (click)="canceledit()"> Cancel<mat-icon> cancel </mat-icon></span>
+      <div *ngFor="let card of cards">
+        <b style="">Card Name</b> <span style="position:absolute; left:50%">{{card.brand}} </span><br><br>
+        <button mat-stroked-button class="delete_but" style="border-color:#156dbf; border-radius: 7px 7px 7px 7px; color:#156dbf;" (click)="deletecard(card.id)"> Delete</button>
+      </div>
+</div>
+
+    </div>
+
+        <!-- <div fxLayout="row" fxLayoutAlign="space-between center" class="header-row mat-elevation-z1 text-muted">
+            <button *ngIf="!sidenavOpen" mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <h3>My Account</h3>
+        </div>
+        <div class="account-wrapper mat-elevation-z1">
+            <router-outlet></router-outlet>
+        </div> -->
+    </mat-sidenav-content>
+</mat-sidenav-container>
+</div>

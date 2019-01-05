@@ -1,0 +1,257 @@
+.funky-show-hide.ng-hide-add {
+  transform: rotateZ(0);
+  transform-origin: right;
+  transition: all 0.5s ease-in-out;
+}
+
+.funky-show-hide.ng-hide-add.ng-hide-add-active {
+  transform: rotateZ(-135deg);
+}
+
+.funky-show-hide.ng-hide-remove {
+  transform: rotateY(90deg);
+  transform-origin: left;
+  transition: all 0.5s ease;
+}
+
+.funky-show-hide.ng-hide-remove.ng-hide-remove-active {
+  transform: rotateY(0);
+}
+
+.check-element {
+  border: 1px solid black;
+  opacity: 1;
+  padding: 10px;
+}
+
+.form_div{
+  align-items: center;
+  //border-style: solid;
+  //border-radius: 1px;
+  //border-color: black;
+  margin: auto;
+  width: 80%;
+  background-color: white;
+  margin-bottom: 10%;
+}
+.new_price{
+  margin-left: 40%;
+  //transform: translate(1000px,100px);
+}
+.inner_div{
+  margin:auto;
+  // margin-top: 10%;
+  width:90%;
+  // border-style: solid;
+  // border-radius: 1px;
+  // border-color: black;
+}
+// .tab_group{
+//   margin-bottom: 10%;
+//   padding-bottom: 10%;
+// }
+.above_tab{
+  //padding: 5%;
+  margin-top: 2%;
+  // margin-bottom: 4%;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #dedede;
+}
+.adds_view{
+  border-style: solid;
+//  border-radius: 5px;
+  border-width: 1%;
+  border-color: #dedede;
+  margin-bottom: 10px;
+}
+// .pics{
+//   border: 1px;
+//   border-style: solid;
+//   border-color: black;
+//   height: 5%;
+//   width: 5%;
+// }
+.pictures{
+  height: 100px;
+  //max-height: 2%;
+  width: 10%;
+  //max-height: auto;
+  //max-width: auto;
+  padding: 1%;
+  overflow: hidden;
+  //margin-top: 1%;
+}
+.titl{
+  //margin-left: 25%;
+  font-size: 4vmin;
+  text-align: center;
+  color: #5a555e;
+  position:absolute;
+  //left:10%;
+  left: 15%;
+  margin-top: 10px;
+  font-weight: bold;
+}
+.price{
+  //margin-left: 25%;
+  font-size: 4vmin;
+  text-align: center;
+  color: black;
+  position:absolute;
+  //left:10%;
+  left: 65%;
+  margin-top: 10px;
+  font-weight: bold;
+}
+// .pictures, .titl{
+//   display: inline;
+// }
+.deactivate{
+  font-size: 2.5vmin;
+  position: absolute;
+  left: 15%;
+  margin-top: 40px;
+  color: #f41b23;
+  font-style: underline;
+  font-weight:400;
+  text-decoration: underline;
+}
+.edit{
+    font-size: 2.5vmin;
+    position: absolute;
+    left: 35%;
+    margin-top: 40px;
+    color: black;
+    font-weight:400;
+    text-decoration: underline;
+
+}
+.preview{
+    font-size: 2.5vmin;
+    position: absolute;
+    left: 42%;
+    margin-top: 40px;
+    color: #173b95;
+    font-weight:400;
+    text-decoration: underline;
+}
+.preview1{
+    font-size: 2.5vmin;
+    position: absolute;
+    left: 15%;
+    margin-top: 40px;
+    color: #173b95;
+    font-weight:400;
+    text-decoration: underline;
+}
+.created{
+    font-size: 2.5vmin;
+    text-align: center;
+    color: #bfbdc1;
+    position:absolute;
+    left: 15%;
+    margin-top: 90px;
+    font-weight: bold;
+}
+// .msg{
+//   border: 1px solid;
+//   border-radius: 5%;
+//   border-color: black;
+// }
+.msgs{
+  position:absolute;
+  left: 90%;
+  font-size: 4vmin;
+  margin-top: 20px;
+  color: #173b95;
+}
+.boost{
+  height: 10%;
+  width: 10%;
+  float: right;
+  margin-top: 90px;
+}
+.slide{
+  position:absolute;
+  left: 80%;
+  font-size: 4vmin;
+  margin-top: 20px;
+}
+.acc_rjj{
+  height: 10%;
+  width: 10%;
+  float: right;
+  margin-top: 45px;
+  margin-right: 2%;
+}
+.tick_cross{
+  float: right;
+  margin-top: 45px;
+  margin-right: 2%;
+  // border-style: solid;
+  // border-width: 1%;
+  background-color: #f41b23;
+  color: white;
+}
+.tick_cross1{
+  float: right;
+  margin-top: 45px;
+  margin-right: 2%;
+  // border-style: solid;
+  // border-width: 1%;
+  background-color: #173b95;
+  color: white;
+}
+.line_2{
+}
+
+
+
+.all-products{
+    min-height: 400px;
+    padding: 2px;
+    overflow: hidden;
+    &.p-left{
+        padding-left: 16px;
+    }
+}
+
+.products-wrapper{
+    margin: 8px -8px;
+    .col{
+        padding: 8px;
+    }
+}
+
+
+.review-order-table.mat-table {
+    display: block;
+    overflow-x:auto;
+    .mat-row, .mat-header-row {
+        display: flex;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        align-items: center;
+        min-height: 48px;
+        padding: 0 24px;
+        min-width: 760px;
+    }
+    .mat-row{
+        min-height: 60px;
+    }
+    .mat-cell, .mat-header-cell {
+        flex: 1;
+        overflow: hidden;
+        word-wrap: break-word;
+    }
+    .mat-header-cell {
+        font-size: 14px;
+    }
+    .mat-cell{
+        img{
+            width: 60px;
+        }
+    }
+
+}

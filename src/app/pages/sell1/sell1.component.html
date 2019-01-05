@@ -1,0 +1,574 @@
+
+<mat-sidenav-container style="background-color:white">
+  <mat-toolbar-row fxLayoutAlign="space-between center"  class="top-toolbar theme-container" style="background-color:#156dbf; max-width:100% !important; height:40px" >
+      <span fxHide="false" fxHide.gt-sm>
+          <button mat-button (click)="sidenav.toggle()" class="sidenav-toggle">
+              <mat-icon>menu</mat-icon>
+          </button>
+      </span>
+      <span fxShow="false" fxShow.gt-xs fxLayoutAlign="center center"></span>
+      <span fxShow="false" fxShow.gt-sm></span>
+      <app-top-menu style="margin-right:1%"></app-top-menu>
+  </mat-toolbar-row>
+
+<app-menu fxShow="false" fxShow.gt-sm></app-menu>
+
+
+<div class="theme-container main">
+    <router-outlet></router-outlet>
+</div>
+<!-- <a class="logo" routerLink="/"  (click) ="closeSubMenus()">
+  <span style="font-size:60%; font-family: proxs; color:#342d38;"> Back To Home</span>
+
+<img src="\assets\images\icons\logo.png" class="logo"/>
+</a> -->
+<div class="form_div">
+  <div class="inner_div">
+    <span>
+    <a routerLink="/"  (click) ="closeSubMenus()">
+      <span class="log" style="font-size:140%; font-family: proxs; color:#342d38; margin-left:5%; margin-bottom:-6%" > Back To Home</span>
+    <!-- <img src="\assets\images\icons\logo.png" class="logo"/> -->
+    </a>
+    <div class="titles_s"> {{this.heading}}</div>
+  </span>
+    <!-- <img src="\assets\images\Untitled-1_0000_SUBMIT-AN-AD.png" class="sub"/> -->
+
+
+<form [hidden]="!fhid" style="margin-top:3%">
+  <mat-vertical-stepper [linear]="isLinear" #stepper>
+    <mat-step>
+        <ng-template matStepLabel>Necessary Requirements</ng-template>
+  <label for="title" class="titles" id="title">Ad Title</label>
+    <input type="text" class="title_area" id="title" maxlength="100" #ti_m="ngModel" [(ngModel)]="title_1" [ngModelOptions]="{standalone: true}" [value]="title" required> &nbsp; <span style="color:red">{{this.invalid}}</span>
+    <!-- <div *ngIf="ti_m.invalid" style="color: red">*</div> -->
+    <p class="hint1">Max 100 characters.</p>
+  <label for="category" class="titles" id="categ">Category</label><br>
+    <mat-select class="category_area" id="categ" #m_t="ngModel" [(ngModel)]="category_1" [ngModelOptions]="{standalone: true}" required>
+      <mat-option *ngFor="let category of categories"  [value]="category.name">
+        <img [src]="category.image" class="images">
+                {{category.name}}
+      </mat-option>
+    </mat-select>&nbsp; <span style="color:red">{{this.invalid}}</span>
+    <!-- <div *ngIf="m_t.invalid" style="color: red">*</div> -->
+    <p class="hint1">Mobile Phones Tablets e.t.c.</p>
+
+    <mat-grid-list cols="2" rowHeight="8:0.5">
+      <mat-grid-tile>
+    <label for="brands" class="titles1" id="brands">Brands</label>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <label for="device" class="titles1" id="device">Device Model</label><br>
+    </mat-grid-tile>
+    </mat-grid-list>
+
+        <mat-grid-list cols="2" rowHeight="5:1">
+          <mat-grid-tile>
+  <mat-select class="brands" id="brands" #br_m="ngModel" [(ngModel)]="brand_1" [ngModelOptions]="{standalone: true}"(ngModelChange)="setNewBrand($event)" required>
+        <mat-option *ngFor="let brand of brands" [value]="brand">
+          <img [src]="brand.picture" class="images" align="Middle">
+        {{brand.brandName}}
+        </mat-option>
+        <mat-option (click)="addnew()">
+          Other
+        </mat-option>
+      </mat-select>&nbsp; <span style="color:red">{{this.invalid}}</span>
+      <!-- <div *ngIf="br_m.invalid" style="color: red">*</div> -->
+
+    </mat-grid-tile>
+      <mat-grid-tile>
+    <mat-select class="device" id="device" #de_m="ngModel" [(ngModel)]="mobile_1" [ngModelOptions]="{standalone: true}" required>
+      <mat-option *ngFor="let mobile of mobiles" [value]="mobile._id" >
+      {{mobile.DeviceName}}
+    </mat-option>
+        </mat-select>&nbsp; <span style="color:red">{{this.invalid}}</span>
+        <!-- <div *ngIf="de_m.invalid" style="color: red">*</div> -->
+      </mat-grid-tile>
+      </mat-grid-list>
+
+
+<mat-grid-list cols="2" rowHeight="8:0.5">
+  <mat-grid-tile>
+<p class="hint1">Apple, Samsung e.t.c</p>
+</mat-grid-tile>
+<mat-grid-tile>
+<p class="hint1">Mobile Phones, Tablets e.t.c.</p>
+</mat-grid-tile>
+</mat-grid-list>
+<div [hidden]="!newbr">
+  <label for="newbrand" class="titles" id="price">Cannot Find Your Brand ? </label><br>
+<input type="text" placeholder="Add Brand" class="condition_area" id="new_brand" maxlength="14" [(ngModel)]="new_brand" [ngModelOptions]="{standalone: true}" [value]="new_brand" required>
+<button mat-raised-button class="brand_but" (click)="createbrand(new_brand)" style="background-color:#156dbf; border-radius: 7px 7px 7px 7px;color:white;"> Add Brand</button>
+</div>
+  <label for="price" class="titles" id="price">Price</label><br>
+  <input type="number" class="price_box" step="100" min="1" required #co_m="ngModel" [(ngModel)]="price_1" [ngModelOptions]="{standalone: true}" [value]="price"/> &nbsp; <span style="color:red">{{this.invalid}}</span><br>
+  <!-- <div *ngIf="co_m.invalid" style="color: red">*</div> -->
+
+  <label for="description" class="titles" id="description">Ad Description</label><br>
+  <textarea matInput rows="4" cols="50" class="description" maxlength="3000" #d_m="ngModel" [(ngModel)]="description_1" [ngModelOptions]="{standalone: true}" [value]="description"> required </textarea> &nbsp; <span style="color:red">{{this.invalid}}</span>
+  <!-- <div *ngIf="d_m.invalid" style="color: red">*</div> -->
+  <p class="hint1">Max 3000 Characters</p>
+
+  <mat-grid-list cols="2" rowHeight="8:0.5">
+    <mat-grid-tile>
+  <label for="color" class="titles1" id="color">Color</label>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <label for="storage" class="titles1" id="storage">Storage</label><br>
+  </mat-grid-tile>
+  </mat-grid-list>
+
+
+  <mat-grid-list cols="2" rowHeight="5:1">
+  <mat-grid-tile>
+  <mat-select class="color_area" id="color" #c_m="ngModel" [(ngModel)]="color_1" [ngModelOptions]="{standalone: true}" required>
+  <mat-option *ngFor="let color of colors" [value]="color">
+  {{color}}
+  </mat-option>
+  </mat-select> &nbsp; <span style="color:red">{{this.invalid}}</span>
+  <!-- <div *ngIf="c_m.invalid" style="color: red">*</div> -->
+
+
+  </mat-grid-tile>
+  <mat-grid-tile>
+  <mat-select class="storage_area" id="storage" #s_m="ngModel" [(ngModel)]="store_1" [ngModelOptions]="{standalone: true}" required>
+  <mat-option *ngFor="let storage of storage" [value]='storage+" GB"' >
+  {{storage}} GB
+  </mat-option>
+  </mat-select> &nbsp; <span style="color:red">{{this.invalid}}</span>
+  <!-- <div *ngIf="s_m.invalid" style="color: red">*</div> -->
+
+  </mat-grid-tile>
+  </mat-grid-list>
+
+  <label for="IMEI" class="titles" id="IMEI">IMEI</label><br>
+  <input matInput type="number" min="0" rows="1" class="imi" maxlength="14" minlength="14" [(ngModel)]="imei_nu" [ngModelOptions]="{standalone: true}" [value]="IMEI" required> &nbsp; <span style="color:red">{{this.imei_not}}</span>
+  <!-- <mat-error *ngIf="IMEI.('minLength')" style="font-size:130%;">Password is required</mat-error> -->
+  <p class="hint1">Minimum 14 characters. (optional)</p>
+
+
+  <mat-grid-list cols="2" rowHeight="8:0.5">
+    <mat-grid-tile>
+  <label for="condition" class="titles1" id="condition">Condition</label>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <label for="ag" class="titles1" id="ag">Age</label><br>
+  </mat-grid-tile>
+  </mat-grid-list>
+
+
+  <mat-grid-list cols="2" rowHeight="5:1">
+  <mat-grid-tile>
+  <mat-select class="color_area" id="condition" #c_m="ngModel" [(ngModel)]="condition_1" [ngModelOptions]="{standalone: true}" required>
+  <mat-option *ngFor="let condition of condition" [value]="condition._id">
+  {{condition.title}}
+  </mat-option>
+  </mat-select> &nbsp; <span style="color:red">{{this.invalid}}</span>
+  <!-- <div *ngIf="c_m.invalid" style="color: red">*</div> -->
+
+
+  </mat-grid-tile>
+  <mat-grid-tile>
+  <mat-select class="color_area" id="ag" [(ngModel)]="ag_1" [ngModelOptions]="{standalone: true}" required>
+  <mat-option *ngFor="let ag of age" [value]="ag.count" >
+  {{ag.name}}
+  </mat-option>
+  </mat-select> &nbsp; <span style="color:red">{{this.invalid}}</span>
+  <!-- <div *ngIf="s_m.invalid" style="color: red">*</div> -->
+
+  </mat-grid-tile>
+  </mat-grid-list>
+
+  <!-- <label for="condition" class="titles" id="condition">Condition</label><br>
+  <mat-select class="condition_area" id="condition" name="condition" #c_m="ngModel" [(ngModel)]="condition_1" [ngModelOptions]="{standalone: true}" required>
+  <mat-option *ngFor="let condition of condition"  [value]="condition._id">
+  {{condition.title}}
+  </mat-option>
+  </mat-select>
+
+  <br><label for="ag" class="titles" id="ag">Age</label><br>
+  <mat-select class="condition_area" id="ag" name="ag" [(ngModel)]="ag_1" [ngModelOptions]="{standalone: true}" required>
+  <mat-option *ngFor="let ag of age" (click)="selectage(ag.count)" [value]="ag.count">
+  {{ag.name}}
+  </mat-option>
+  </mat-select> -->
+
+
+  <!-- <div *ngIf="c_m.invalid" style="color: red">*</div> -->
+
+
+  <div class="picture_area">
+    <label class="titles">Device Details</label><br>
+    <label for="file">
+        <img src="assets\images\Untitled-1_0003_Layer-1.png" class="fle"/>
+    </label>
+
+    <input id="file" type="file" [value]="pictures" (change)="handleFileInput($event)" multiple />
+  </div>
+  <div class="picture_view">
+    <img id="blah" class="picture_view" [src]="imageSrc || 'http://placehold.it/180'" alt="your image" />
+  </div>
+
+  <p class="hint1">Ads with Photos Sell Faster</p>
+</mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Functional or Physical (optional)</ng-template>
+  <label class="titles">Does the Mobile Switch on ? &nbsp; &nbsp; </label>
+  <label class="container" for="switch" id="switch">
+  <mat-checkbox class="checkmark" color="warn" [(ngModel)]="checksw" name="chc" ng-true-value = 'false'
+    ng-false-value='true' (ngModelChange)="switchcheck(checksw)"> </mat-checkbox>
+  </label>
+  <p class="hint1">Should be able to make and receive calls</p><br>
+
+  <label for="f&pcon" class="titles" id="f&pcon">Functional or Physical Condition</label><br>
+  <p class="hint1">Please Tick/Untick Checkboxes</p>
+  <div *ngFor="let issue of issues" >
+  <mat-checkbox class="f&p_con" color="warn" [(ngModel)]="issue.checked" name="checkis" [value]="issue._id" (ngModelChange)="checkboxissues(issue._id)">
+  <label for="f&pcon" class="hint1" id="f&pcon">
+  {{issue.description}}
+  </label>
+  </mat-checkbox>
+  </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Accessories (optional)</ng-template>
+  <label for="access" class="titles" id="access">Available Accessories</label><br>
+  <p class="hint1">Please Tick/Untick Checkboxes</p>
+  <div *ngFor="let accessory of accessories">
+    <mat-checkbox class="f&p_con" color="warn" [(ngModel)]="accessory.checked" name="check" [value]="accessory._id" (ngModelChange)="checkBoxChange(accessory._id)">
+    <label for="f&pcon" class="hint1" id="f&pcon">
+    {{accessory.title}}
+    </label>
+    </mat-checkbox>
+  </div>
+</mat-step>
+</mat-vertical-stepper>
+<img src="\assets\images\Untitled-1_0002_POST-YOUR-AD.png" (click)="submit(title_1,category_1,brand_1,mobile_1,price_1,description_1,color_1,store_1,imei_nu,condition_1,ag_1,pictures_1,accessory_1)" class="post"/>
+
+</form>
+
+
+
+
+
+
+<!-- <form [formGroup]="passForm" (ngSubmit)="onsellFormSubmit(sellForm.value)" [hidden]="!fhid" >
+  <mat-vertical-stepper [linear]="isLinear" #stepper>
+    <mat-step>
+        <ng-template matStepLabel>Necessary Requirements</ng-template>
+        <label for="title" class="titles" id="title">Ad Title</label>
+        <mat-form-field class="w-100 mt-2">
+          <input matInput placeholder="" class="form_area" formControlName="title" required>
+          <mat-error *ngIf="sellForm.controls.title.errors?.required">Title is required</mat-error>
+        </mat-form-field>
+    <p class="hint1">Max 100 characters.</p>
+
+  <label for="category" class="titles" id="categ">Category</label><br>
+  <mat-form-field style="width:45%">
+    <mat-select  id="categ" required>
+      <mat-option *ngFor="let category of categories" [value]="category.name" formControlName="category">
+        <img [src]="category.image" class="images">
+                {{category.name}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="sellForm.controls.category.errors?.required">Category is required</mat-error>
+  </mat-form-field>
+    <p class="hint1">Mobile Phones Tablets e.t.c.</p>
+
+    <mat-grid-list cols="2" rowHeight="8:0.5">
+      <mat-grid-tile>
+    <label for="brands" class="titles1" id="brands">Brands</label>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <label for="device" class="titles1" id="device">Device Model</label><br>
+    </mat-grid-tile>
+    </mat-grid-list>
+
+        <mat-grid-list cols="2" rowHeight="5:1">
+          <mat-grid-tile>
+
+      <mat-form-field style="width:90%">
+        <mat-select  id="brands" (ngModelChange)="setNewBrand($event)" required>
+          <mat-option *ngFor="let brand of brands" [value]="brand" formControlName="brand">
+            <img [src]="brand.picture" class="images" align="Middle">
+                    {{brand.brandName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="sellForm.controls.brand.errors?.required">Brand is required</mat-error>
+      </mat-form-field>
+
+    </mat-grid-tile>
+      <mat-grid-tile>
+
+        <mat-form-field style="width:90%">
+          <mat-select  id="device" required>
+            <mat-option *ngFor="let mobile of mobiles" [value]="mobile.id" formControlName="mobile">
+                      {{mobile.DeviceName}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="sellForm.controls.mobile.errors?.required">Mobile is required</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+      </mat-grid-list>
+
+
+<mat-grid-list cols="2" rowHeight="8:0.5">
+  <mat-grid-tile>
+<p class="hint1">Apple, Samsung e.t.c</p>
+</mat-grid-tile>
+<mat-grid-tile>
+<p class="hint1">Mobile Phones, Tablets e.t.c.</p>
+</mat-grid-tile>
+</mat-grid-list>
+<div>
+  <label for="newbrand" class="titles" id="price">Cannot Find Your Brand ? </label><br>
+<input type="text" placeholder="Add Brand" class="condition_area" id="new_brand" maxlength="14" [(ngModel)]="new_brand" [ngModelOptions]="{standalone: true}" [value]="new_brand" required>
+<button mat-raised-button class="brand_but" (click)="createbrand(new_brand)" style="background-color:#156dbf; border-radius: 7px 7px 7px 7px;color:white;" (click)="adrouter()"> Add Brand</button>
+</div><br>
+  <label for="price" class="titles" id="price">Price</label><br>
+  <mat-form-field style="width:45%">
+    <input matInput placeholder="" type="number" step="100" formControlName="price" [value]="price" required>
+    <mat-error *ngIf="sellForm.controls.price.errors?.required">Price is required</mat-error>
+  </mat-form-field><br>
+
+
+  <label for="description" class="titles" id="description">Ad Description</label><br>
+  <textarea matInput rows="4" cols="50" class="description" maxlength="3000" [(ngModel)]="description_1" [ngModelOptions]="{standalone: true}" [value]="description"> required </textarea>
+  <p class="hint1">Max 3000 Characters</p>
+
+  <mat-grid-list cols="2" rowHeight="8:0.5">
+    <mat-grid-tile>
+  <label for="color" class="titles1" id="color">Color</label>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <label for="storage" class="titles1" id="storage">Storage</label><br>
+  </mat-grid-tile>
+  </mat-grid-list>
+
+
+  <mat-grid-list cols="2" rowHeight="5:1">
+  <mat-grid-tile>
+  <mat-select class="color_area" id="color" [(ngModel)]="color_1" [ngModelOptions]="{standalone: true}" required>
+  <mat-option *ngFor="let color of colors" [value]="color">
+  {{color}}
+  </mat-option>
+  </mat-select>
+
+  </mat-grid-tile>
+  <mat-grid-tile>
+  <mat-select class="storage_area" id="storage" [(ngModel)]="store_1" [ngModelOptions]="{standalone: true}" required>
+  <mat-option *ngFor="let storage of storage" [value]='storage+" GB"' >
+  {{storage}} GB
+  </mat-option>
+  </mat-select>
+  </mat-grid-tile>
+  </mat-grid-list>
+
+  <label for="condition" class="titles" id="condition">Condition</label><br>
+  <mat-select class="condition_area" id="condition" name="condition" [(ngModel)]="condition_1" [ngModelOptions]="{standalone: true}" required>
+  <mat-option *ngFor="let condition of condition"  [value]="condition._id">
+  {{condition.title}}
+  </mat-option>
+  </mat-select>
+
+  <div class="picture_area">
+    <label class="titles">Device Details</label><br>
+    <label for="file">
+        <img src="assets\images\Untitled-1_0003_Layer-1.png" class="fle"/>
+    </label>
+
+    <input id="file" type="file" [value]="pictures" (change)="handleFileInput($event)" multiple />
+  </div>
+  <div class="picture_view">
+    <img id="blah" class="picture_view" [src]="imageSrc || 'http://placehold.it/180'" alt="your image" />
+  </div>
+
+  <p class="hint1">Ads with Photos Sell Faster</p>
+</mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Functional or Physical (optional)</ng-template>
+  <label class="titles">Does the Mobile Switch on ?</label>
+  <label class="container" for="switch" id="switch">
+  <mat-checkbox class="checkmark" color="warn" [(ngModel)]="checksw" name="chc" ng-true-value = 'false'
+    ng-false-value='true' (ngModelChange)="switchcheck(checksw)"> </mat-checkbox>
+  </label>
+  <p class="hint1">Should be able to make and receive calls</p><br>
+
+  <label for="f&pcon" class="titles" id="f&pcon">Functional or Physical Condition</label><br>
+  <p class="hint1">Please Tick/Untick Checkboxes</p>
+  <div *ngFor="let issue of issues" >
+  <mat-checkbox class="f&p_con" color="warn" [(ngModel)]="issue.checked" name="checkis" [value]="issue._id" (ngModelChange)="checkboxissues(issue._id)">
+  <label for="f&pcon" class="hint1" id="f&pcon">
+  {{issue.description}}
+  </label>
+  </mat-checkbox>
+  </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Accessories (optional)</ng-template>
+  <label for="access" class="titles" id="access">Available Accessories</label><br>
+  <p class="hint1">Please Tick/Untick Checkboxes</p>
+  <div *ngFor="let accessory of accessories">
+    <mat-checkbox class="f&p_con" color="warn" [(ngModel)]="accessory.checked" name="check" [value]="accessory._id" (ngModelChange)="checkBoxChange(accessory._id)">
+    <label for="f&pcon" class="hint1" id="f&pcon">
+    {{accessory.title}}
+    </label>
+    </mat-checkbox>
+  </div>
+</mat-step>
+</mat-vertical-stepper>
+<img src="\assets\images\Untitled-1_0002_POST-YOUR-AD.png" (click)="submit(title_1,category_1,brand_1,mobile_1,price_1,description_1,color_1,store_1,condition_1,pictures_1,accessory_1)" class="post"/>
+
+</form> -->
+
+
+
+
+
+<div [hidden]="!confhid">
+
+<div class="cnfirm" *ngFor="let myad of pic_view" >
+  <div class="img_div">
+    <img [src]="myad.pictures[0]" height="300" width="300" class="pictures"/>
+  </div>
+  <b style="position:absolute; font-family:proxs; font-size:150%">Title </b> <span style="position:absolute; left:50%; font-family:proxs">{{myad.title}} </span><br><br>
+  <b style="position:absolute; font-family:proxs; font-size:150%">Brand Name </b> <span style="position:absolute; left:50%; font-family:proxs">{{myad.brandName}} </span><br><br>
+  <b style="position:absolute; font-family:proxs; font-size:150% ">Description </b> <span style="position:absolute; left:50%; font-family:proxs">{{myad.description}} </span><br><br>
+  <b style="position:absolute; font-family:proxs;font-size:150%">Price </b> <span style="position:absolute; left:50%; font-family:proxs">{{myad.price}} </span><br><br>
+  <b style="position:absolute; font-family:proxs; font-size:150%">Color </b> <span style="position:absolute; left:50%; font-family:proxs">{{myad.color}} </span><br><br>
+  <b style="position:absolute; font-family:proxs; font-size:150%">Storage </b> <span style="position:absolute; left:50%; font-family:proxs">{{myad.storage}} </span><br><br>
+  <b style="position:absolute; font-family:proxs; font-size:150%">Condition </b> <span style="position:absolute; left:50%; font-family:proxs">{{myad.condition.title}} </span><br><br>
+
+  <b style="position:absolute; font-family:proxs; font-size:150%">Physical Conditions </b><br>
+  <div *ngFor="let ad of myad.physicalIssues" >
+  <span style="position:absolute; left:50%; font-family:proxs">{{ad.title}} <mat-icon style="color:#156dbf; float:left"> done </mat-icon> </span> <br><br>
+</div><br>
+
+<b style="position:absolute; font-family:proxs; font-size:150%">Accessories</b>
+<div *ngFor="let ab of myad.accessories" >
+   <span style="position:absolute; left:50%; font-family:proxs">{{ab.title}} <mat-icon style="color:#156dbf;float:left"> done </mat-icon> </span> <br><br>
+</div>
+<div>
+  <button mat-stroked-button (click)="verify_add()" style="border-color:#156dbf;border-radius:5px 5px 5px 5px; font-family:proxr" class="post1">Confirm Add</button>
+
+</div>
+
+
+</div>
+
+</div>
+
+<div [hidden]="!hid" style="margin-top:5%; ">
+  <!-- <button mat-raised-button class="skip_but" (click)="skiploc()" type="submit" style="border-color:#156dbf; border-radius: 7px 7px 7px 7px;color:#156dbf;"> Skip </button> -->
+  <div class="skip_but" (click)="skiploc()" type="submit" style="color:#156dbf;"> Skip  </div>
+
+  <!-- <div fxLayout="row wrap" style=" margin-bottom:5%"> -->
+  <!-- <div fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" fxFlex.sm="50"> -->
+
+  <div class="container-fluid" style="margin-top:1%; margin-left:10%"  >
+    <div class='row'>
+      <div class="form-group">
+        <!-- <label class='titles' style="text-align:center">City</label><br> -->
+        <input class='title_area1' (change)="updateOnMap()" placeholder="Enter City" [(ngModel)]='location.address_level_2'/>
+      </div><br>
+
+    </div>
+  </div>
+
+<div style="box-shadow:5px 6px 6px #bfbdc1; margin-left:30%; width:40%">
+  <agm-map [(latitude)]="this.latitude" [(longitude)]="this.longitude" [(zoom)]="location.zoom" [disableDefaultUI]="true" [zoomControl]="true" [(fitBounds)]='location.viewport' >
+    <agm-marker [(latitude)]="this.latitude" [(longitude)]="this.longitude" [markerDraggable]="location.marker.draggable" (dragEnd)='markerDragEnd($event)' ></agm-marker>
+
+
+  <!-- <agm-circle [latitude]="this.latitude" [longitude]="this.longitude"
+    [(radius)]="circleRadius"
+    [fillColor]="'blue'"
+    [circleDraggable]="true"
+    [editable]="true"></agm-circle> -->
+  </agm-map>
+
+</div>
+<!-- </div> -->
+
+  <!-- <div fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50"  fxFlex.sm="50" ngClass.gt-sm=" m-0" ngClass.sm="mt-2" ngClass.xs="mt-2" style="font-family: proxr;"> -->
+
+
+
+  <div style="text-align:center; margin-top:3%;">
+    <button mat-raised-button (click)="advertlocation()" type="submit" style="border:1px solid; border-color:#156dbf; color:#156dbf; border-radius: 7px 7px 7px 7px;font-size:150%; height:60%; padding-top: 0.5%;padding-bottom: 0.5%; width:15%"> Update </button>
+
+  </div>
+
+<!-- </div> -->
+<!-- </div> -->
+
+
+</div>
+
+</div>
+<!-- <img src="\assets\images\cam.png" (click)="uploadImage(file)" class="post"/> -->
+</div>
+
+
+
+
+
+<!--
+<mat-vertical-stepper [linear]="isLinear" #stepper>
+<mat-step>
+<button mat-button matStepperNext>Next</button> </mat-step>
+<mat-step><ng-template matStepLabel>Fill out your name</ng-template> </mat-step>
+<mat-step><ng-template matStepLabel>ahahahah</ng-template></mat-step>
+</mat-vertical-stepper>
+<mat-select class="brnds" placeholder="Accessories" multiple  >
+  <mat-option *ngFor="let accessory of accessories" [value]="accessory" >
+  <img [src]="accessory.image">
+  {{accessory.title}}
+</mat-option>
+</mat-select>
+<mat-select class="brnds" placeholder="Any Issues ?" multiple  >
+  <mat-option *ngFor="let issue of issues" [value]="issue" >
+  <img [src]="issue.image">
+  {{issue.description}}
+</mat-option>
+</mat-select>
+
+  <div fxLayout="row" fxFlex="100" fxFlex.gt-sm="25">
+  </div>
+  <div fxLayout="row" fxFlex="100" fxFlex.gt-sm="25">
+  </div>
+  <div fxLayout="row" fxFlex="100" fxFlex.gt-sm="25">
+  </div>
+  <div fxLayout="row" fxFlex="100" fxFlex.gt-sm="25">
+  <label>Your Desired Price</label>
+  <input type="number" placeholder="Price in:" step="100" />
+</div>
+<div fxLayout="row">
+  <mat-form-field>
+  <textarea matInput placeholder="Add Your Description"></textarea>
+</mat-form-field>
+  </div>
+  <div>
+    <input type="file" multiple>
+    <label for="file"> Select Image </label>
+    <input type="file" Id="file"
+    (ngModelChange)="handleFileInput($event.target.files)"/>
+    <img [src]="url" height="200"> <br/>
+  </div>
+  <select class="brnds" placeholder="Select Brand" >
+  <option *ngFor="let brand of brands" [value]="brand" (ngSubmit)="rbrands()">
+  {{brand.brandName}}
+</option>
+</select> -->
+
+<app-options></app-options>
+
+<!-- <app-footer></app-footer> -->
+
+<div *ngIf="showBackToTop" fxLayout="row" fxLayoutAlign="center center" class="back-to-top transition" (click)="scrollToTop()">
+    <mat-icon>arrow_upward</mat-icon>
+</div>
+
+
+</mat-sidenav-container>

@@ -1,0 +1,362 @@
+<div class="main_screen" [hidden]="!main">
+  <div class="make_offer" *ngIf="this.myid != this.aduserid" >
+      <span class="fw-500">
+        <!-- <label for="make-offer" class="titles" id="make-offer">Make Offer</label><br>
+        <input type="number" class="offer_box" step="100" required [(ngModel)]="make_offer" [ngModelOptions]="{standalone: true}" [value]="make_offer"/><br> -->
+        <label for="make-offer" class="titles_off" id="make-offer" style="font-family: proxr;">Make Offer</label><br>
+        <input type="number" class="offer_box" step="100" required [(ngModel)]="make_offer" [ngModelOptions]="{standalone: true}" [value]="make_offer" style="font-family: proxr; font-size:200%; border-radius:7px 7px 7px 7px;"/><br>
+      </span>
+      <button mat-stroked-button class="offer_but" id="make-offer" (click)="makeoffer(make_offer)" style="font-family: proxs; background-color:#156dbf; border-radius: 7px 7px 7px 7px; color:white;"> OFFER</button>
+      <button mat-stroked-button ngDefaultControl class="cancel" (click)="cancel()" style="font-family: proxs; border-color:#156dbf; border-radius: 7px 7px 7px 7px; color:#156dbf; margin-left:10%">CANCEL</button>
+
+  </div>
+
+</div>
+
+<div [hidden]="!top">
+  <mat-toolbar style="background-color:#FFFFFF; height:100px;" >
+  <mat-toolbar-row fxLayoutAlign="space-between center" class="logo-toolbar theme-container" style="background-color:#FFFFFF;margin-bottom:10%; margin-top:2%">
+      <a class="logo" routerLink="/"  (click) ="closeSubMenus()">
+        <span style="font-size:60%; font-family: proxs; color:#342d38; margin-left:190px; cursor:pointer"> Back to Home</span>
+      <!-- <img src="assets/images/icons/logo.png" height=80 style="margin-left:100%;"/> -->
+    </a>
+  </mat-toolbar-row>
+</mat-toolbar>
+</div>
+
+<div class="form_view" [hidden]="!frm">
+  <div class="titles_s"> Ad Details</div>
+
+
+<div fxLayout="row wrap" style="margin-top:3%;">
+  <!-- <div fxFlex="100" fxFlex.gt-md="20" fxFlex.md="30" style="border: 1px solid;"> -->
+    <div fxFlex="100" fxFlex.gt-md="32" fxFlex.md="32" fxFlex.sm="45">
+
+
+    <mat-card class="product-image mat-elevation-z0" style="font-family: proxr; padding:0%; display:initial;">
+      <button mat-icon-button (click)="openZoomViewer()" style="margin-top:-5%;"><mat-icon >fullscreen</mat-icon></button>
+      <img *ngIf="image" [src]="image" (mousemove)="onMouseMove($event)" (mouseleave)="onMouseLeave($event)"/>
+    </mat-card>
+
+    <div class="small-carousel" style="font-family: proxr;padding:0%">
+      <div class="swiper-container" [swiper]="config">
+        <div class="swiper-wrapper">
+          <div *ngFor="let image of product?.pictures" class="swiper-slide" >
+
+            <mat-card (click)="selectImage(image)" style="display:initial; padding:0px;box-shadow: 0px 0px 0px; ">
+              <img [attr.data-src]="image" class="swiper-lazy" />
+              <div class="swiper-lazy-preloader"></div>
+            </mat-card>
+          </div>
+        </div>
+        <button mat-icon-button class="swiper-button-prev swipe-arrow"><mat-icon>keyboard_arrow_left</mat-icon></button>
+        <button mat-icon-button class="swiper-button-next swipe-arrow"><mat-icon>keyboard_arrow_right</mat-icon></button>
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" class="details text-muted py-1">
+    </div>
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" class="details text-muted py-1">
+      <!-- <div>
+        <img [attr.data-src]="profilePic" class="swiper-lazy" style="font-family: proxr;"/><p>{{name}}</p>
+      </div> -->
+      <div style="margin-left:35px">
+        <img src={{this.profilePicture}} height="45" width="45" class="user_img" style="border-radius:50%; object-fit:cover"/> <span style="font-family:proxs; color:#342d38; margin-left:7px; margin-top: 5px;position:absolute; font-size:120%"> {{name}} </span>
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" class="details text-muted py-1" style="margin-left:20px; margin-top:-3%;" *ngIf="this.myid != this.aduserid">
+
+      <a mat-button [matMenuTriggerFor]="accountMenu" #accountMenuTrigger="matMenuTrigger" style="font-family:proxr">
+          <span fxShow="false" fxShow.gt-sm><i>Report this Ad</i></span>
+      </a>
+      <mat-menu #accountMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="app-dropdown account" style="font-family:proxr">
+          <span (mouseleave)="accountMenuTrigger.closeMenu()">
+              <div class="divider"></div>
+              <span mat-menu-item>
+                  <span style="font-family:proxr" (click)="report_fake()" ><i>flag as fake</i></span>
+              </span>
+              <span mat-menu-item>
+                  <span style="font-family:proxr" (click)="report_sold()"><i>flag as sold</i></span>
+              </span>
+              <span mat-menu-item>
+                  <span style="font-family:proxr" (click)="report_review()"><i>needs review</i></span>
+              </span>
+
+
+              <div class="divider"></div>
+
+          </span>
+      </mat-menu>
+    </div>
+
+  <!-- <div>
+    <img src="\assets\images\heart.png" (click)="addtofavourites()" class="favourite"/>
+  </div> -->
+  </div>
+
+  <div fxFlex="100" fxFlex.gt-md="35" fxFlex.md="35"  fxFlex.sm="45" ngClass.gt-sm=" m-0" ngClass.sm="mt-2" ngClass.xs="mt-2" style="font-family: proxr;">
+
+    <div #zoomViewer fxShow="false" fxShow.gt-md>
+      <mat-card *ngIf="zoomImage" class="zoom-viewer mat-elevation-z18" [ngStyle]="{'background-image': 'url(' + zoomImage + ')'}"></mat-card>
+    </div>
+
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" class="details text-muted py-1">
+    </div>
+
+    <span class="titles" style="margin-left:4%">{{product?.title}}</span>
+    <br>
+    <div class="py-1 lh" style="height: 140px;margin-left:4% ">
+      <p><span class="titles_d fw-500">{{product?.description}}</span></p>
+      <!-- <p><span class="text-muted fw-500">Availibility: </span><span>{{ (product?.visible == true) ? 'In stock':'Unavailable'}}</span></p> -->
+    </div>
+    <!-- <div class="py-1">
+    <app-rating [ratingsCount]="product?.ratingsCount" [ratingsValue]="product?.ratingsValue" [direction]="'row'"></app-rating>
+  </div> -->
+  <!-- <p class="py-1 text-muted lh">{{product?.description}}</p> -->
+
+  <!-- <div class="divider mt-1"></div> -->
+
+
+
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" class="details text-muted py-1">
+
+    <div class="titles" style="margin-left:4%" *ngIf = "product?.storage">
+      <img class="icon" style="margin-bottom:-5%" src="assets/images/icons/memory.png" />
+      {{product?.storage}}
+    </div>
+    <!-- <div class="color" style="font-family: proxr;">
+      <span class="fw-500" style="font-family: proxr;">COLOR : {{product?.color}}</span>
+
+      <button mat-raised-button *ngFor="let color of product?.color" [style.background]="color">&nbsp;</button>
+    </div> -->
+
+
+</div>
+
+<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" class="details text-muted py-1" style="margin-top:-20px">
+  <div class="titles" style="margin-top:-6px;margin-left:4%" *ngIf = "product?.storage">
+    <img class="icon" style="margin-bottom:-5%" src="assets/images/icons/colour.png" />
+    {{product?.color}}
+  </div>
+  <div *ngIf="this.myid != this.aduserid">
+  <span *ngIf="this.isFavourite == 'false' "><button mat-icon-button matTooltip="Add to Favourites" (click)="addtofavourites()"><mat-icon style="color:#a40000">favorite_border</mat-icon></button></span>
+  <span *ngIf="this.isFavourite == 'true' "><button mat-icon-button (click)="addtofavourites()"><mat-icon style="color:#a40000">favorite</mat-icon></button></span>
+
+  </div>
+</div>
+<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" class="details text-muted py-1" style="margin-left:7%; margin-top:-10px" >
+  <span style="color:#342d38; font-family:proxr; font-size:120%; " *ngIf="this.accessories != undefined && this.accessories != null && this.accessories != '' " >
+    - includes <span *ngFor="let issues of accessories" style="font-family:proxs; color:#342d38">{{issues.description}}, </span>
+  </span>
+</div>
+
+<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" class="details text-muted py-1" style="margin-top:-6%; margin-left:7%">
+  <span style="color:#342d38; font-family:proxr; font-size:120%; margin-bottom:2%" *ngIf="this.age != undefined && this.age != null && this.age != '' && this.age == 1 ">
+    - used <span style="font-family:proxs; color:#342d38">{{product?.age}} Year </span>
+  </span>
+  <span style="color:#342d38; font-family:proxr; font-size:120%; margin-bottom:2%" *ngIf="this.age != undefined && this.age != null && this.age != '' && this.age >= 2 ">
+    - used <span style="font-family:proxs; color:#342d38">{{product?.age}} Years </span>
+  </span>
+  <span style="color:#342d38; font-family:proxr; font-size:120%; margin-bottom:2%" *ngIf="this.age != undefined && this.age != null && this.age != '' && this.age == 0 ">
+    - used <span style="font-family:proxs; color:#342d38"> Less than a Year </span>
+  </span>
+  <span style="color:#342d38; font-family:proxr; font-size:120%; margin-bottom:2%" *ngIf="this.age != undefined && this.age != null && this.age != '' && this.age == 8 ">
+    - used <span style="font-family:proxs; color:#342d38"> More than 7 Years </span>
+  </span>
+  <span style="color:#342d38; font-family:proxr; font-size:120%; margin-bottom:2%" *ngIf="this.age != undefined && this.age != null && this.age != '' && this.age == -1 ">
+    -  <span style="font-family:proxs; color:#342d38"> Brand New </span>
+  </span>
+</div>
+
+<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" class="details text-muted py-1">
+  <button mat-raised-button ngDefaultControl class="buy_but" style="background-color:#156dbf; border-radius: 7px 7px 7px 7px;color:white;margin-left:4%; margin-top:4%;" *ngIf="this.myid != this.aduserid">
+    <img src="assets/images/icons/message.png" height=20 class="envelope"/>
+    CONTACT
+  </button>
+</div>
+
+<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" class="details text-muted py-1" style="margin-top:-3%; " >
+  <button mat-raised-button ngDefaultControl class="buy_but" (click)="buy()" style="background-color:#156dbf; border-radius: 7px 7px 7px 7px;color:white;margin-left:4%" *ngIf="this.myid != this.aduserid && !this.offers">
+    <img src="assets/images/icons/cart.png" height=25 class="cart"/>
+    BUY THIS
+  </button>
+  <span class="price">{{this.mycurrency}} <span style="font-size:4vmin"> {{this.price}} </span></span>
+</div>
+
+
+<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" class="details text-muted py-1" style="margin-top:-3%; float:right" >
+  <div style="" *ngIf="this.myid == this.aduserid && !this.boosted">
+    <img src="assets/images/icons/boost.png" height=80 style="float:right" (click)="boostad(product?._id)"/>
+  </div>
+</div>
+<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" class="details text-muted py-1" style="margin-top:-3%; float:right" >
+  <div style="" *ngIf="this.myid == this.aduserid && this.boosted">
+    <img src="assets/images/icons/boost-dis.png" height=80 style="float:right" (click)="removeboost(product?._id)"/>
+  </div>
+</div>
+
+
+
+
+
+<!--
+<div class="py-1">
+  <app-controls [product]="product" [type]="'all'"></app-controls>
+</div>
+
+<div class="divider"></div> -->
+<div fxLayout="row" fxLayoutAlign="space-between center" class="text-muted py-1">
+
+</div>
+
+</div>
+<div fxFlex="100" fxFlex.gt-md="33" fxFlex.md="33" fxShow.sm="false" fxHide fxShow.gt-sm fxHide.sm ngClass.gt-sm="px-3 m-0" ngClass.sm="mt-2" ngClass.xs="mt-2" style="font-family: proxr;background-color:#f2f2f2;" *ngIf="this.deviceDetailscheck != null">
+  <div class="full-desc lh" style="margin-left:-25%; width:100%;">
+    <div style="font-family:proxs; font-size:110%">
+      {{deviceName}}
+    </div>
+    <!-- <div fxLayout="row wrap" style="margin-top:3%;">
+        <div fxFlex="100" fxFlex.gt-md="35" fxFlex.md="35" fxFlex.sm="45"> -->
+    <ul  style="font-family: proxr; color:black; list-style-type:none; margin-left:2%">
+    <li><b style="font-size:85%;font-family:proxs"class="2rd">Card Slot</b> <span style="font-size: 85%; position:absolute; left:70%" class="3rd">{{card_slot}}</span></li>
+    <li><b style="font-size:85%;font-family:proxs"class="2rd">LoudSpeaker</b> <span style="font-size: 85%; position:absolute; left:70%" class="3rd">{{Loudspeaker}}</span></li>
+    <li><b style="font-size:85%;font-family:proxs"class="2rd">Brand</b> <span style="font-size: 85%;position:absolute; left:70%" class="3rd">{{brandName}}</span></li>
+    <li><b style="font-size:85%;font-family:proxs"class="2rd">Gps</b><span style="font-size: 85%;position:absolute;left:70% " class="3rd">{{gps}}</span></li>
+    <li><b style="font-size:85%;font-family:proxs"class="2rd">Description</b><span style="font-size: 85%;position:absolute; left:70%" class="3rd"> later </span></li>
+    <li><b style="font-size:85%;font-family:proxs"class="2rd">Technology</b><span style="font-size: 85%;position:absolute; left:70%" class="3rd"> {{technology}} </span></li>
+    <li><b style="font-size:85%;font-family:proxs"class="2rd">Sim</b><span style="font-size: 85%;position:absolute; left:70%" class="3rd"> {{sim}} </span></li>
+    <li><b style="font-size:85%;font-family:proxs"class="2rd">Type</b><span style="font-size: 85%;position:absolute; left:70%; " class="3rd"> {{type}} </span></li>
+    <li><b style="font-size:85%;font-family:proxs"class="2rd">Alert Types</b><span style="font-size: 85%;position:absolute; left:70%" class="3rd"> {{alert_types}} </span></li>
+    <li><b style="font-size:85%;font-family:proxs"class="2rd">Bluetooth</b><span style="font-size: 85%;position:absolute; left:70%" class="3rd"> {{bluetooth}} </span></li>
+    <li><b style="font-size:85%;font-family:proxs"class="2rd">Edge</b><span style="font-size: 85%;position:absolute; left:70%" class="3rd"> {{edge}} </span></li>
+    <li><b style="font-size:85%;font-family:proxs"class="2rd">Messaging</b><span style="font-size: 85%;position:absolute; left:70%" class="3rd"> {{messaging}} </span></li>
+    </ul>
+  <!-- </div>
+  <div fxFlex="100" fxFlex.gt-md="65" fxFlex.md="65" fxFlex.sm="45">
+
+  </div>
+</div> -->
+
+  </div>
+
+
+<!-- <div fxFlex="100" fxFlex.gt-md="20" fxHide fxShow.gt-md>
+
+  <div fxLayout="row wrap" class="info-bar" ngClass.gt-md="m-0">
+    <div fxFlex="100" fxFlex.md="25" fxFlex.sm="50">
+      <mat-card class="light-block" fxLayout="row"  fxLayoutAlign="start center">
+        <mat-icon class="mat-icon-xlg text-muted m-0">card_giftcard</mat-icon>
+        <div class="content">
+          <p>CONDITION</p>
+          <span class="text-muted m-0">{{condition}}</span>
+        </div>
+      </mat-card>
+    </div>
+    <div fxFlex="100" fxFlex.md="25" fxFlex.sm="50" class="mt-16">
+      <mat-card class="light-block" fxLayout="row"  fxLayoutAlign="start center">
+        <mat-icon class="mat-icon-xlg text-muted m-0">local_shipping</mat-icon>
+        <div class="content">
+          <p>FREE SHIPPING</p>
+          <span class="text-muted m-0">Free shipping on all orders over $99</span>
+        </div>
+      </mat-card>
+    </div>
+    <div fxFlex="100" fxFlex.md="25"fxFlex.sm="50" class="mt-16">
+      <mat-card class="light-block" fxLayout="row"  fxLayoutAlign="start center">
+        <mat-icon class="mat-icon-xlg text-muted m-0">monetization_on</mat-icon>
+        <div class="content">
+          <p>MONEY BACK GUARANTEE</p>
+          <span class="text-muted m-0">30 Days money return guarantee</span>
+        </div>
+      </mat-card>
+    </div>
+    <div fxFlex="100" fxFlex.md="25" fxFlex.sm="50" class="mt-16">
+      <mat-card class="light-block" fxLayout="row"  fxLayoutAlign="start center">
+        <mat-icon class="mat-icon-xlg text-muted m-0">history</mat-icon>
+        <div class="content">
+          <p>ONLINE SUPPORT 24</p>
+          <span class="text-muted m-0">Call us: (+100) 123 456 7890</span>
+        </div>
+      </mat-card>
+    </div>
+  </div> -->
+
+<!-- </div> -->
+
+
+
+</div>
+</div>
+
+
+<!-- <div fxLayout="row wrap" class="mt-2" style="font-family: proxr;">
+<div fxFlex="100" fxFlex.gt-md="78" fxFlex.md="74">
+  <div fxFlex="100" fxFlex.gt-md="100" fxFlex.md="100">
+    <mat-card class="mat-elevation-z0" style="margin-left: 7%;width:70%">
+      <mat-tab-group [@.disabled]="true" [selectedIndex]="0">
+        <mat-tab label="DEVICE DETAILS" style="font-family: proxr;">
+          <div class="full-desc lh">
+
+            <ul class="px-2 mt-1" style="font-family: proxr;">
+              <li><b style="font-size:2vmin">Brand Name :</b> <span style="position:absolute;font-family: proxr;font-size: 2vmin; left:50%">{{brandName}} </span></li>
+              <li><b style="font-size:2vmin">Alert_types :</b> <span style="position:absolute;font-size: 2vmin; left:50%">{{alert_types}} </span></li>
+              <li><b style="font-size:2vmin">Announced :</b> <span style="position:absolute;font-size: 2vmin; left:50%">{{announced}} </span></li>
+              <li><b style="font-size:2vmin">Battery :</b> <span style="position:absolute; font-size: 2vmin;left:50%">{{battery_c}}</span></li>
+              <li><b style="font-size:2vmin">Bluetooth :</b> <span style="position:absolute; font-size: 2vmin;left:50%">{{bluetooth}}</span></li>
+              <li><b style="font-size:2vmin">Card Slot :</b> <span style="position:absolute; font-size: 2vmin;left:50%">{{card_slot}}</span></li>
+              <li><b style="font-size:2vmin">Dimensions :</b><span style="position:absolute; font-size: 2vmin;left:50%"> {{dimensions}}</span></li>
+              <li><b style="font-size:2vmin">Edge :</b><span style="position:absolute; font-size: 2vmin;left:50%"> {{edge}}</span></li>
+              <li><b style="font-size:2vmin">Gps :</b> <span style="position:absolute; font-size: 2vmin;left:50%">{{gps}}</span></li>
+              <li><b style="font-size:2vmin">Java :</b> <span style="position:absolute; font-size: 2vmin;left:50%">{{java}}</span></li>
+              <li><b style="font-size:2vmin">Messaging :</b> <span style="position:absolute; font-size: 2vmin;font-size: 2vmin;left:50%">{{messaging}}</span></li>
+              <li><b style="font-size:2vmin">Loudspeaker :</b> <span style="position:absolute;font-size: 2vmin; left:50%">{{loudspeaker_}}</span></li>
+              <li><b style="font-size:2vmin">Radio :</b><span style="position:absolute;font-size: 2vmin; left:50%"> {{radio}}</span></li>
+              <li><b style="font-size:2vmin">Sim :</b> <span style="position:absolute;font-size: 2vmin; left:50%">{{sim}}</span></li>
+              <li><b style="font-size:2vmin">Stand_by :</b> <span style="position:absolute; font-size: 2vmin;left:50%">{{stand_by}}</span></li>
+              <li><b style="font-size:2vmin">Status :</b><span style="position:absolute; font-size: 2vmin;left:50%"> {{status}}</span></li>
+              <li><b style="font-size:2vmin">Talk_time :</b><span style="position:absolute; font-size: 2vmin;left:50%"> {{talk_time}}</span></li>
+              <li><b style="font-size:2vmin">Technology :</b><span style="position:absolute; font-size: 2vmin;left:50%"> {{technology}}</span></li>
+              <li><b style="font-size:2vmin">Type :</b><span style="position:absolute;font-size: 2vmin; left:50%"> {{type}}</span></li>
+              <li><b style="font-size:2vmin">Wlan :</b><span style="position:absolute;font-size: 2vmin; left:50%"> {{wlan}}</span></li>
+            </ul>
+
+          </div>
+        </mat-tab>
+        <mat-tab label="PHYSICAL CONDITIONS" style="font-family: proxr;">
+          <div class="full-desc lh" style="font-family: proxr;">
+
+            <ul class="px-2 mt-1" style="font-family: proxr;">
+              <li *ngFor="let issue of physicalIssues"> <b style="font-size:2vmin">{{issue.description}}</b><span style="position:absolute; left:40%;font-size:2vmin"> Yes</span></li>
+            </ul>
+          </div>
+  </mat-tab>
+        <mat-tab label="CONDITION" style="font-family: proxr;font-size:2vmin">
+          <div class="full-desc lh">
+            <p style="font-family: proxr;font-size:2vmin">{{conditionTitle}}</p>
+            <ul class="px-2 mt-1">
+              <li *ngFor="let issue of condition">{{issue}}</li>
+            </ul>
+          </div>
+  </mat-tab>
+
+      <mat-tab label="ACCESSORIES" style="font-family: proxr;">
+        <div class="full-desc lh">
+
+          <ul class="px-2 mt-1" style="font-family: proxr;">
+            <li *ngFor="let issues of accessories"><b style="font-size:2vmin">{{issues.description}}</b><span style="position:absolute; left:40%;font-size:2vmin"> Yes</span></li>
+          </ul>
+        </div>
+</mat-tab>
+      </mat-tab-group>
+
+    </mat-card>
+  </div>
+</div>
+</div> -->
+
+<!-- <div class="py-2 mt-2">
+  <h2>Related Products</h2>
+  <div class="divider"></div>
+  <app-products-carousel [products]="relatedProducts"></app-products-carousel>
+</div> -->
