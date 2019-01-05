@@ -1,0 +1,477 @@
+.AdminAccount .AdsManagement{
+  font-family: proxr;
+}
+
+.AdsManagement .Ads_header{
+  display: flex;
+  font-family: proxr;
+  margin-top: -5%;
+  margin-bottom: 3%;
+}
+.AdsManagement .Ads_reports{
+  background-color: grey;
+  margin-right:5%;
+  margin-left:5%;
+  color: white;
+  padding: 1%;
+  border-radius: 5px 5px 5px 5px;
+}
+.AdsManagement .Ads_all{
+  background-color: grey;
+  color: white;
+  padding: 1%;
+  border-radius: 5px 5px 5px 5px;
+}
+.AdsManagement .grid_border{
+border: 1px solid black;
+text-align: center;
+word-wrap: break-word;
+font-family: proxr;
+}
+.AdsManagement .table_cells{
+  word-wrap: break-word;
+}
+.AdsManagement .action_button{
+  background-color: #156dbf;
+  border-color: #156dbf;
+  color: #ffffff;
+  font-family: proxr;
+  border-radius: 5px 5px 5px 5px;
+}
+.dismiss_report_button{
+  font-family:proxr;
+  background-color: white;
+  border: 1px solid #156dbf;
+  border-radius: 5px 5px 5px 5px;
+  color:#156dbf;
+  font-size: 100%;
+  height: 30%;
+  width: 30%;
+  margin-right:5%;
+
+}
+.delete_ad_button{
+  font-family:proxr;
+  background-color: white;
+  border: 1px solid #156dbf;
+  border-radius: 5px 5px 5px 5px;
+  color:#156dbf;
+  font-size: 100%;
+  height: 30%;
+  width: 30%;
+  margin-right:5%;
+
+}
+.suspend_user_button{
+  font-family:proxr;
+  background-color: white;
+  border: 1px solid #156dbf;
+  border-radius: 5px 5px 5px 5px;
+  color:#156dbf;
+  font-size: 100%;
+  height: 30%;
+  width: 30%;
+}
+
+/* AdsManagement */
+.AdsManagement .AdItem{
+  margin-bottom:2%;
+  overflow: hidden;
+  border-radius: 0.5px;
+  box-shadow:5px 6px 6px #bfbdc1, -1px -1px 6px #bfbdc1;
+  height: 150px;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  align-content: center;
+}
+.AdsManagement .ImageSide{
+  height: 100%;
+  width: 50%;
+}
+.AdsManagement .update_offer_button{
+  font-family:proxr;
+  background-color: white;
+  border: 1px solid #156dbf;
+  border-radius: 5px 5px 5px 5px;
+  color:#156dbf;
+  font-size: 200%;
+  height: 25%;
+  width: 40%;
+  float: right;
+  margin-top: -20%;
+  margin-right: 10%;
+}
+.accept_offer_button{
+  font-family:proxr;
+  background-color: white;
+  border: 1px solid #156dbf;
+  border-radius: 5px 5px 5px 5px;
+  color:#156dbf;
+  font-size: 100%;
+  height: 30%;
+  width: 30%;
+  float: left;
+  margin-left:5%;
+}
+.AdsManagement .counter_offer_button{
+  font-family:proxr;
+  background-color: white;
+  border: 1px solid #156dbf;
+  border-radius: 5px 5px 5px 5px;
+  color:#156dbf;
+  font-size: 65%;
+  height: 20%;
+  width: 30%;
+  float: right;
+  margin-top: -15%;
+  margin-right: 5%;
+}
+.AdsManagement .rejected_offer_button{
+  font-family:proxr;
+  background-color: white;
+  border: 1px solid #156dbf;
+  border-radius: 5px 5px 5px 5px;
+  color:#156dbf;
+  font-size: 80%;
+  height: 20%;
+  width: 30%;
+  float: right;
+  margin-top: -15%;
+  margin-right: 5%;
+}
+.reject_offer_button{
+  font-family:proxr;
+  background-color: white;
+  border: 1px solid #156dbf;
+  border-radius: 5px 5px 5px 5px;
+  color:#156dbf;
+  font-size: 100%;
+  height: 30%;
+  width: 30%;
+  float: right;
+  margin-right:5%;
+
+}
+.reject_offer_button:hover{
+  font-family:proxr;
+  background-color: #156dbf;
+  border: 1px solid #156dbf;
+  border-radius: 5px 5px 5px 5px;
+  color:#ffffff;
+  font-size: 100%;
+  height: 30%;
+  width: 30%;
+  float: right;
+  margin-right:5%;
+}
+.accept_offer_button:hover{
+  font-family:proxr;
+  background-color: #156dbf;
+  border: 1px solid #156dbf;
+  border-radius: 5px 5px 5px 5px;
+  color:#ffffff;
+  font-size: 100%;
+  height: 30%;
+  width: 30%;
+  float: left;
+  margin-left:5%;
+}
+.AdsManagement .actions_offer_button{
+  font-family:proxr;
+  background-color: white;
+  border: 1px solid #156dbf;
+  border-radius: 5px 5px 5px 5px;
+  color:#156dbf;
+  font-size: 90%;
+  height: 20%;
+  width: 30%;
+  float: right;
+  margin-top: -15%;
+  margin-right: 5%;
+}
+.AdsManagement .actions1_offer_button{
+  font-family:proxr;
+  background-color: white;
+  border: 1px solid #156dbf;
+  border-radius: 5px 5px 5px 5px;
+  color:#156dbf;
+  font-size: 65%;
+  height: 20%;
+  width: 30%;
+  float: right;
+  margin-top: -15%;
+  margin-right: 5%;
+}
+
+.AdsManagement .ImageSideImage{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.AdsManagement .CheckedImage{
+  height: 12px;
+  object-fit: cover;
+  float: right;
+ }
+ .AdsManagement .offer_inp{
+     margin-left:17%;
+ }
+ .AdsManagement .offer_input{
+   /* width: 60%; */
+   border: 1px solid #dbd6d6;
+   border-radius: 5px 5px 5px 5px;
+   height: 35px;
+   border-top:0px;
+   border-left:0px;
+   border-right:0px;
+ }
+.AdsManagement .DescriptionSide{
+  /* background-color: #f4f4f4; */
+  height: 100%;
+  width: 50%;
+  font-size:40%;
+  margin-left:5px;
+
+}
+
+.AdsManagement  .AdDescription{
+  float:left;
+  text-Align:left;
+  font-size: 130%;
+  /* margin-bottom:10px; */
+  width: 100%;
+  text-overflow: clip;
+  height: 25%;
+}
+.AdsManagement .AdTitle{
+  display: block;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 3.6em;
+  line-height: 1.8em;
+
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  float:left;
+  margin-bottom:5px;
+  width: 100%;
+  text-overflow: clip;
+  height: 15%;
+
+}
+.AdsManagement .rightdiv{
+  display: flex;
+  padding: 0px;
+  font-family: proxs;
+  margin-bottom:2px;
+  margin-left:-5px;
+  width: 100%;
+  height: 10%;
+  align-items: center;
+}
+.AdsManagement .pricediv{
+  margin-top: 3%;
+  display: flex;
+  align-items: baseline;
+}
+.AdsManagement .pricediv_my{
+  margin-bottom: 3px;
+  display: flex;
+  align-items: baseline;
+}
+.AdsManagement .storage_color_image{
+  align: left;
+  object-fit:scale-down;
+  height:80%;
+}
+.AdsManagement .edit{
+  float: right;
+  text-align: right;
+  color: red;
+  font-size: 50%;
+  margin-left: 20%;
+}
+.AdsManagement .MyAdsoffs{
+
+}
+.AdsManagement .offersbyme{
+
+}
+.AdsManagement .buttonsplacing{
+  float: left;
+  margin-top:-10%;
+}
+.AdsManagement .BlueButt{
+  font-family:proxr;
+  background-color: #156dbf;
+  border: 1px solid #156dbf;
+  border-radius: 5px 5px 5px 5px;
+  color:#ffffff;
+  font-size: 120%;
+  height: 40px;
+  width: 100px;
+}
+.AdsManagement .offersButton{
+  font-family:proxr;
+  background-color: white;
+  border: 1px solid #156dbf;
+  border-radius: 5px 5px 5px 5px;
+  color:#156dbf;
+  font-size: 120%;
+  height: 40px;
+  width: 100px;
+}
+.AdsManagement .offersButton:active{
+  font-family:proxr;
+  background-color: #156dbf;
+  border: 1px solid #156dbf;
+  border-radius: 5px 5px 5px 5px;
+  color:#ffffff;
+  font-size: 120%;
+  height: 40px;
+  width: 100px;
+}
+.AdsManagement .ReactModal__Content{
+  height: 100px;
+}
+.AdsManagement .ReactModal__Content .ReactModal__Content--after-open{
+  height: 100px;
+
+}
+.AdsManagement .offersButton:focus{
+  font-family:proxr;
+  background-color: #156dbf;
+  border: 1px solid #156dbf;
+  border-radius: 5px 5px 5px 5px;
+  color:#ffffff;
+  font-size: 120%;
+  height: 40px;
+  width: 100px;
+}
+.AdsManagement .offersButton2{
+  font-family:proxr;
+  background-color: white;
+  border: 1px solid #156dbf;
+  border-radius: 5px 5px 5px 5px;
+  color:#156dbf;
+  font-size: 120%;
+  height: 40px;
+  width: 100px;
+}
+.AdsManagement .offersButton2:active{
+  font-family:proxr;
+  background-color: #156dbf;
+  border: 1px solid #156dbf;
+  border-radius: 5px 5px 5px 5px;
+  color:#ffffff;
+  font-size: 120%;
+  height: 40px;
+  width: 100px;
+}
+.AdsManagement .offersButton2:focus{
+  font-family:proxr;
+  background-color: #156dbf;
+  border: 1px solid #156dbf;
+  border-radius: 5px 5px 5px 5px;
+  color:#ffffff;
+  font-size: 120%;
+  height: 40px;
+  width: 100px;
+}
+
+
+
+.AdminAccount .table_cells{
+  font-size: 100%;
+  text-align: left;
+}
+.AdminAccount .remove_admin{
+  font-size: 70%;
+  background-color: red;
+  border-color: red;
+
+  color: white;
+  border-radius: 5px 5px 5px 5px;
+}
+.AdminAccount .make_admin{
+  font-size: 80%;
+  background-color: green;
+  border-color: green;
+
+  color: white;
+  border-radius: 5px 5px 5px 5px;
+}
+.AdminAccount .suspend_user{
+  font-size: 80%;
+  background-color: red;
+  border-color: red;
+
+  color: white;
+  border-radius: 5px 5px 5px 5px;
+}
+.AdminAccount .un-suspend_user{
+  font-size: 80%;
+  background-color: green;
+  border-color: green;
+  color: white;
+  border-radius: 5px 5px 5px 5px;
+}
+
+.AdminAccount .unsuspend_all{
+  font-size: 100%;
+  background-color: green;
+  border-color: green;
+  color: white;
+  border-radius: 5px 5px 5px 5px;
+  float: right;
+  margin-top: 3%;
+  margin-bottom: 3%;
+}
+.AdminAccount .Dropdown-root{
+  width:20%;
+  padding: 0px;
+  text-align: left;
+}
+.AdminAccount .Dropdown{
+  border-bottom: 1px solid black;
+}
+
+.AdminAccount .Dropdown_users{
+  /* width:20%;
+  padding: 0px;
+  text-align: left; */
+}
+.AdminAccount .Dropdown_users{
+  border-bottom: 1px solid black;
+}
+.AdminAccount .arrow-down{
+  /* height: 15px;
+  width: 15px;
+  float: left;
+  margin-left: 17%; */
+  /* margin-top: -2%; */
+}
+.table_cells_email{
+
+}
+.table_cells_mobile{
+
+}
+.table_cells_account{
+
+}
+.table_cells_currency{
+
+}
+.table_cells_package{
+
+}
+.table_cells_admin{
+
+}
+.table_cells_users{
+
+}

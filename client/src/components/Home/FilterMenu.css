@@ -1,0 +1,16 @@
+.leftside{
+  float: left;
+  font-family: proxs;
+  overflow: hidden;
+}
+.arrow-down{
+  height: 10%;
+  width: 10%;
+  float: right;
+}
+.age_select{
+  border-top:0px;
+  border-left:0px;
+  border-right:0px;
+  font-family: proxs;
+}
